@@ -18,14 +18,14 @@
       --gold:#f59e0b; --silver:#94a3b8; --bronze:#b45309; --diamond:#22d3ee; --royal:#7c3aed;
       --radius:16px; --shadow:0 10px 28px rgba(15,23,42,.08);
       --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
-      --accent-soft:color-mix(in srgb, var(--accent) 12%, transparent);
+      --accent-soft:rgba(37,99,235,.12); --accent-soft:color-mix(in srgb, var(--accent) 12%, transparent);
     }
     [data-theme="dark"]{
       --bg:#0b1220; --surface:#111827; --surface2:#172033; --surface3:#1f2937;
       --text:#e5e7eb; --muted:#9aa4b2; --border:#334155;
       --shadow:0 14px 36px rgba(0,0,0,.35);
     }
-    html,body{height:100%}
+    html,body{height:100%;max-width:100%;overflow-x:hidden}
     body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,"Noto Sans Arabic",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
     button,input,select,textarea{font:inherit;color:inherit}
     button{cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);min-height:44px;border-radius:12px;padding:10px 14px;font-weight:800;transition:.15s}
@@ -137,7 +137,7 @@
         appId: '1:3482020492:web:72d6f419712c0404a8e9a9'
       };
 
-      const APP = { name:'منجز', version:'2.0.0-ultra', copyright:'© YS — جميع الحقوق محفوظة' };
+      const APP = { name:'منجز', version:'2.0.1-ultra', copyright:'© YS — جميع الحقوق محفوظة' };
       const LS = { profiles:'munjiz.profiles', active:'munjiz.active', prefs:'munjiz.prefs', temp:'munjiz.temp' };
       const DAY = 86400000;
       const STATUS = ['new','inProgress','done'];
@@ -173,6 +173,7 @@
           imported:'تم الاستيراد', importFailed:'ملف غير صالح', exported:'تم التصدير', about:'حول التطبيق', version:'الإصدار',
           developerConsole:'لوحة المطور', developerAccess:'دخول المطور', developerHidden:'وصول المطور محمي.', developerMode:'وضع المطور', noDeveloperAccess:'لا توجد صلاحية مطور', developerReady:'تم فتح وضع YS',
           sendAnnouncement:'إرسال إعلان', featureFlags:'مفاتيح', grantBadge:'منح وسام', grantFrame:'منح إطار', developerLogs:'السجل', maintenanceMode:'الصيانة', copyCode:'نسخ الكود', copied:'تم النسخ',
+          pinAnnouncement:'تثبيت الإعلان', pinned:'مثبّت', manageAnnouncements:'إدارة الإعلانات', unpin:'إلغاء التثبيت', deactivate:'إخفاء', active:'نشط', grantXp:'إهداء نقاط XP', grantLevel:'تعديل مستوى الطالب', targetUid:'معرّف المستخدم UID', amountXp:'عدد النقاط', targetLevel:'المستوى المطلوب', createGlobalChallenge:'إنشاء تحدٍ عام', challengeCreated:'تم نشر التحدي',
           activeTeam:'الفريق النشط', noActiveTeam:'لا فريق نشط', selectTeam:'اختيار', createFirstTeam:'أنشئ فريقًا أو انضم بكود.', noTeams:'لا فرق', noGroups:'لا مجموعات', noSubjects:'لا مواد', noChallenges:'لا تحديات',
           addSubject:'إضافة مادة', addGroup:'إضافة مجموعة', addTask:'مهمة جديدة', addChallenge:'إضافة تحدي', nearestChallenge:'أقرب تحدي', contactDeveloper:'تواصل مع المطور'
         },
@@ -205,6 +206,7 @@
           imported:'Imported', importFailed:'Invalid file', exported:'Exported', about:'About', version:'Version',
           developerConsole:'Developer Console', developerAccess:'Developer Access', developerHidden:'Developer access is protected.', developerMode:'Developer mode', noDeveloperAccess:'No developer access', developerReady:'YS mode unlocked',
           sendAnnouncement:'Send announcement', featureFlags:'Flags', grantBadge:'Grant badge', grantFrame:'Grant frame', developerLogs:'Logs', maintenanceMode:'Maintenance', copyCode:'Copy code', copied:'Copied',
+          pinAnnouncement:'Pin announcement', pinned:'Pinned', manageAnnouncements:'Manage announcements', unpin:'Unpin', deactivate:'Hide', active:'Active', grantXp:'Gift XP points', grantLevel:'Set student level', targetUid:'User UID', amountXp:'XP amount', targetLevel:'Target level', createGlobalChallenge:'Create global challenge', challengeCreated:'Challenge published',
           activeTeam:'Active team', noActiveTeam:'No active team', selectTeam:'Select', createFirstTeam:'Create a team or join with code.', noTeams:'No teams', noGroups:'No groups', noSubjects:'No subjects', noChallenges:'No challenges',
           addSubject:'Add subject', addGroup:'Add group', addTask:'New task', addChallenge:'Add challenge', nearestChallenge:'Nearest challenge', contactDeveloper:'Contact developer'
         }
@@ -340,7 +342,7 @@
         out.developer={unlocked:false,logs:[],flags:{},inquiries:[],...(s.developer||{})};
         out.developer.logs=Array.isArray(out.developer.logs)?out.developer.logs:[];
         out.developer.flags=out.developer.flags&&typeof out.developer.flags==='object'?out.developer.flags:{};
-        out.developer.inquiries=Array.isArray(out.developer.inquiries)?out.developer.inquiries:[];
+        out.developer.inquiries=Array.isArray(out.developer.inquiries)?out.developer.inquiries:[]; out.developer.unlocked=false; // صلاحية المطور لا تُستعاد من التخزين المحلي؛ تُتحقق من Firestore بعد تسجيل الدخول
         out.announcements=Array.isArray(s.announcements)?s.announcements:[];
         out.notifications={seen:{},...(s.notifications||{})};
         out.activeFocus=normalizeActive(s.activeFocus);
@@ -411,10 +413,13 @@
             await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js');
             await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js');
           }
-          fb.app=firebase.initializeApp(FIREBASE_CONFIG); fb.auth=firebase.auth(); fb.db=firebase.firestore();
-          try{ await fb.db.enablePersistence({synchronizeTabs:true}); }catch{}
+          fb.app=(firebase.apps && firebase.apps.length)
+            ? firebase.app()
+            : firebase.initializeApp(FIREBASE_CONFIG);
+          fb.auth=fb.app.auth(); fb.db=fb.app.firestore();
+          try{ await fb.db.enablePersistence({synchronizeTabs:true}); }catch(e){ /* Persistence is optional: private browsing or multiple tabs may disable it. */ }
           fb.ready=true; return true;
-        }catch(e){ console.warn(e); return false; }
+        }catch(e){ console.warn('Firebase initialization failed; local mode remains available.',e); return false; }
       }
       function authError(code){
         const map={'auth/popup-closed-by-user':'invalidCredentials','auth/cancelled-popup-request':'invalidCredentials','auth/network-request-failed':'requiresFirebase','auth/unauthorized-domain':'requiresFirebase','auth/operation-not-allowed':'requiresFirebase','auth/account-exists-with-different-credential':'invalidCredentials','auth/invalid-email':'invalidCredentials','auth/user-not-found':'invalidCredentials','auth/wrong-password':'invalidCredentials','auth/invalid-credential':'invalidCredentials','auth/email-already-in-use':'invalidCredentials','auth/weak-password':'invalidCredentials'};
@@ -482,7 +487,11 @@
           }catch{ state.developer.unlocked=false; return false; }
         },
         log(action,details={}){ if(!state.developer.unlocked)return; state.developer.logs.unshift({id:uid(),at:iso(),action,details}); state.developer.logs=state.developer.logs.slice(0,200); saveState(false); },
-        async sendAnnouncement(title,body){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('announcements').add({title,body,createdAt:iso(),author:'YS',active:true}); this.log('announcement',{title}); toast(t('savedMsg'),'success'); },
+        async sendAnnouncement(title,body,pinned=false){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); await fb.db.collection('announcements').add({title:String(title).trim().slice(0,160),body:String(body).trim().slice(0,3000),createdAt:iso(),author:'YS',active:true,pinned:!!pinned}); this.log('announcement',{title,pinned:!!pinned}); toast(t('savedMsg'),'success'); },
+        async setAnnouncement(id,patch){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); await fb.db.collection('announcements').doc(id).update(patch); this.log('announcement-update',{id,...patch}); },
+        async grantXp(targetUid,amount){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const n=Math.round(num(amount,0)); if(!targetUid||n<1||n>1000000)throw new Error('Invalid UID or XP amount'); const ref=fb.db.collection('users').doc(targetUid).collection('data').doc('main'); let newXp=0,newLevel=1; await fb.db.runTransaction(async tx=>{ const snap=await tx.get(ref); if(!snap.exists)throw new Error('User data not found'); const data=snap.data()||{}, st=data.state||{}; st.game=st.game||{}; newXp=Math.max(0,Math.round(num(st.game.xp,0))+n); newLevel=levelFromXp(newXp); st.game.xp=newXp; st.game.level=newLevel; tx.set(ref,{state:st,updatedAt:Date.now()},{merge:true}); }); await fb.db.collection('publicProfiles').doc(targetUid).set({xp:newXp,level:newLevel,updatedAt:iso()},{merge:true}); this.log('grant-xp',{targetUid,amount:n,newXp,newLevel}); toast(t('savedMsg'),'success'); },
+        async setLevel(targetUid,level){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const l=clamp(Math.round(num(level,1)),1,1000); const xp=xpForLevel(l); const ref=fb.db.collection('users').doc(targetUid).collection('data').doc('main'); await fb.db.runTransaction(async tx=>{ const snap=await tx.get(ref); if(!snap.exists)throw new Error('User data not found'); const data=snap.data()||{}, st=data.state||{}; st.game=st.game||{}; st.game.xp=xp; st.game.level=l; tx.set(ref,{state:st,updatedAt:Date.now()},{merge:true}); }); await fb.db.collection('publicProfiles').doc(targetUid).set({xp,level:l,updatedAt:iso()},{merge:true}); this.log('set-level',{targetUid,level:l,xp}); toast(t('savedMsg'),'success'); },
+        async createGlobalChallenge(d){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const c=normalizeChallenge({...d,ownerId:fb.auth.currentUser.uid,source:'cloud',status:'active'}); const payload={...c,createdAt:iso(),createdBy:fb.auth.currentUser.uid,global:true}; delete payload.id; const ref=await fb.db.collection('challenges').add(payload); c.id=ref.id; state.challenges.cloud.unshift(c); this.log('global-challenge',{id:c.id,title:c.title}); toast(t('challengeCreated'),'success'); return c; },
         async setFlag(key,value){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('developer').doc('flags').set({[key]:value},{merge:true}); this.log('flag',{key,value}); toast(t('savedMsg'),'success'); },
         async grantBadge(targetUid,badgeId){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('userBadges').doc(targetUid).collection('badges').doc(badgeId).set({grantedAt:iso(),by:'YS'}); this.log('grantBadge',{targetUid,badgeId}); toast(t('savedMsg'),'success'); },
         async grantFrame(targetUid,frameId){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('userFrames').doc(targetUid).set({frames:firebase.firestore.FieldValue.arrayUnion(frameId)},{merge:true}); this.log('grantFrame',{targetUid,frameId}); toast(t('savedMsg'),'success'); },
@@ -507,7 +516,7 @@
         if(!fb.ready || state.auth.provider!=='firebase') return;
         liveUnsubscribers.forEach(u=>u&&u()); liveUnsubscribers=[];
         try{
-          liveUnsubscribers.push(fb.db.collection('announcements').orderBy('createdAt','desc').limit(10).onSnapshot(snap=>{ state.announcements=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active); saveState(false); }));
+          liveUnsubscribers.push(fb.db.collection('announcements').orderBy('createdAt','desc').limit(10).onSnapshot(snap=>{ state.announcements=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active); saveState(false); if(state.ui.view==='home')render(); }));
           liveUnsubscribers.push(fb.db.collection('developer').doc('flags').onSnapshot(doc=>{ if(doc.exists){ state.developer.flags=doc.data()||{}; saveState(false); applyFeatureFlags(); } }));
         }catch(e){ console.warn(e); }
       }
@@ -587,8 +596,8 @@
         async fetch(){ if(!fb.ready || state.auth.provider!=='firebase' || !state.auth.uid)return; try{ const snap=await fb.db.collection('teams').where('memberIds','array-contains',state.auth.uid).limit(50).get(); const cloud=snap.docs.map(d=>normalizeTeam({id:d.id,...d.data()})); state.teams=[...cloud,...state.teams.filter(t=>!t.shared)]; if(state.activeTeamId && !state.teams.some(t=>t.id===state.activeTeamId)) state.activeTeamId=state.teams[0]?.id||null; saveState(false); }catch(e){ console.warn(e); } }
       };
       const Challenges={
-        async create(d){ const c=normalizeChallenge({...d,ownerId:state.auth.uid||'local'}); if(fb.ready && state.auth.provider==='firebase' && state.auth.uid){ c.source='cloud'; const ref=await fb.db.collection('challenges').add({...c,createdAt:firebase.firestore.FieldValue.serverTimestamp()}); c.id=ref.id; state.challenges.cloud.unshift(c); } else { c.source='local'; state.challenges.local.unshift(c); } saveState(); toast(t('savedMsg'),'success'); return c; },
-        async fetchCloud(){ if(!fb.ready || state.auth.provider!=='firebase')return []; try{ const snap=await fb.db.collection('challenges').orderBy('endsAt','asc').limit(50).get(); state.challenges.cloud=snap.docs.map(d=>normalizeChallenge({id:d.id,...d.data()})).filter(c=>c.status==='active'&&new Date(c.endsAt)>=new Date()); saveState(false); return state.challenges.cloud; }catch{return[];} },
+        async create(d){ const c=normalizeChallenge({...d,ownerId:state.auth.uid||'local'}); if(fb.ready && state.auth.provider==='firebase' && state.auth.uid){ c.source='cloud'; const payload={...c,createdAt:iso()}; delete payload.id; const ref=await fb.db.collection('challenges').add(payload); c.id=ref.id; state.challenges.cloud.unshift(c); } else { c.source='local'; state.challenges.local.unshift(c); } saveState(); toast(t('savedMsg'),'success'); return c; },
+        async fetchCloud(){ if(!fb.ready || state.auth.provider!=='firebase')return []; try{ const snap=await fb.db.collection('challenges').orderBy('endsAt','asc').limit(50).get(); state.challenges.cloud=snap.docs.map(d=>normalizeChallenge({...d.data(),id:d.id})).filter(c=>c.status==='active'&&new Date(c.endsAt)>=new Date()); saveState(false); return state.challenges.cloud; }catch{return[];} },
         async join(id,source='cloud'){ const u=state.auth.uid||activeProfile?.id||'local'; if(source==='local'){ const c=state.challenges.local.find(x=>x.id===id); if(c&&!c.participants.includes(u))c.participants.push(u); saveState(); toast(t('challengeJoined'),'success'); return; } if(!fb.ready)return; try{ await fb.db.collection('challenges').doc(id).collection('participants').doc(u).set({joinedAt:iso(),uid:u}); const c=state.challenges.cloud.find(x=>x.id===id); if(c&&!c.participants.includes(u))c.participants.push(u); saveState(false); toast(t('challengeJoined'),'success'); }catch{ toast(t('requiresFirebase'),'error'); } },
         async submit(id,source='cloud'){ const u=state.auth.uid||activeProfile?.id||'local'; const at=iso(); if(source==='local'){ const c=state.challenges.local.find(x=>x.id===id); if(!c)return; c.submissions.push({uid:u,at}); c.submissions.sort((a,b)=>new Date(a.at)-new Date(b.at)); if(c.submissions[0]?.uid===u){ state.game.raceWins++; Gamification.addXp(c.rewardXp||50); toast(t('challengeWon'),'success'); } state.game.challengeWins++; saveState(); Gamification.checkBadges(); toast(t('challengeSubmitted'),'success'); return; } if(!fb.ready)return; try{ await fb.db.collection('challenges').doc(id).collection('submissions').doc(u).set({uid:u,at}); const first=await fb.db.collection('challenges').doc(id).collection('submissions').orderBy('at','asc').limit(1).get(); if(first.docs[0]?.id===u){ state.game.raceWins++; Gamification.addXp(80); toast(t('challengeWon'),'success'); } state.game.challengeWins++; Gamification.addXp(30); saveState(); toast(t('challengeSubmitted'),'success'); }catch{ toast(t('requiresFirebase'),'error'); } }
       };
@@ -716,7 +725,8 @@
         const todays=state.tasks.filter(x=>x.status!=='done'&&x.dueAt&&sameDay(parseDate(x.dueAt),new Date()));
         const overdue=state.tasks.filter(isOverdue).length;
         const nearest=[...state.challenges.cloud,...state.challenges.local].filter(c=>new Date(c.endsAt)>=new Date()).sort((a,b)=>new Date(a.endsAt)-new Date(b.endsAt))[0];
-        return `<div class="grid stats">${statCard(t('today'),todays.length,`${overdue} ${t('overdue')}`,'tasks')}${statCard(t('xp'),state.game.xp,`${t('level')} ${state.game.level}`,'star')}${statCard(t('streak'),state.game.streak,`${t('bestStreak')}: ${state.game.bestStreak}`,'fire')}${statCard(t('focus'),fmtDuration(focusMinutesOn(new Date())),t('todaySessions'),'focus')}</div>
+        const pinned=(state.announcements||[]).filter(a=>a.active!==false&&a.pinned).sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
+        return `${pinned.length?`<div class="card" style="margin-bottom:12px;border:1px solid var(--accent);background:linear-gradient(135deg,var(--surface),var(--surface2))"><div class="row between"><h2 class="title">📌 ${esc(pinned[0].title||t('pinned'))}</h2><span class="badge done">${esc(t('pinned'))}</span></div><p style="white-space:pre-wrap;margin:8px 0 0">${esc(pinned[0].body||'')}</p></div>`:''}<div class="grid stats">${statCard(t('today'),todays.length,`${overdue} ${t('overdue')}`,'tasks')}${statCard(t('xp'),state.game.xp,`${t('level')} ${state.game.level}`,'star')}${statCard(t('streak'),state.game.streak,`${t('bestStreak')}: ${state.game.bestStreak}`,'fire')}${statCard(t('focus'),fmtDuration(focusMinutesOn(new Date())),t('todaySessions'),'focus')}</div>
         <div class="card" style="margin-top:12px"><h2 class="title">${esc(t('quickAdd'))}</h2><form id="quickAddForm" class="row" style="margin-top:10px"><input class="input" name="text" placeholder="${esc(t('quickAdd'))}" required><button class="btn primary" type="submit">${icon('plus',18)} ${esc(t('add'))}</button></form></div>
         <div class="grid cols-2" style="margin-top:12px"><div class="card"><div class="row between"><h2 class="title">${esc(t('today'))}</h2><button class="btn sm" data-action="nav" data-view="tasks">${esc(t('all'))}</button></div><div class="list">${todays.length?todays.slice(0,5).map(taskRow).join(''):emptyHtml(t('noTasks'))}</div></div><div class="card"><h2 class="title">${esc(t('nearestChallenge'))}</h2>${nearest?`<div style="font-weight:900">${esc(nearest.title)}</div><div class="muted small">${esc(fmtDateTime(nearest.endsAt))} • +${nearest.rewardXp} XP</div>`:emptyHtml(t('noChallenges'))}<div class="kv" style="margin-top:10px"><span>${esc(t('activeTeam'))}</span><strong>${esc(state.activeTeamId?teamById(state.activeTeamId)?.name||'—':t('noActiveTeam'))}</strong></div><div class="row" style="margin-top:10px"><button class="btn primary sm" data-action="nav" data-view="focus">${esc(t('startFocus'))}</button><button class="btn sm" data-action="nav" data-view="leaderboard">${esc(t('leaderboard'))}</button></div></div></div>`;
       }
@@ -798,14 +808,19 @@
 
       function renderDeveloper(){
         if(!state.developer.unlocked) return emptyHtml(t('noDeveloperAccess'));
+        const announcements=(state.announcements||[]).slice().sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned)||String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
         return `<div class="card dev-panel"><div class="row between"><div><h2 class="title">${icon('crown',22)} ${esc(t('developerConsole'))}</h2><p class="subtitle"><span class="ys-signature">YS</span> • ${esc(APP.copyright)}</p></div><span class="badge done">${esc(t('developerMode'))}</span></div>
         <div class="grid cols-2" style="margin-top:12px">
-          <div class="card"><h3 class="title">${esc(t('sendAnnouncement'))}</h3><form id="announceForm" class="auth-form"><label class="field"><span>${esc(t('title'))}</span><input class="input" name="title" required></label><label class="field"><span>${esc(t('message'))}</span><textarea class="input" name="body" required></textarea></label><button class="btn primary" type="submit">${esc(t('send'))}</button></form></div>
-          <div class="card"><h3 class="title">${esc(t('featureFlags'))}</h3><form id="flagForm" class="auth-form"><label class="field"><span>Key</span><input class="input" name="key" required placeholder="maintenance"></label><label class="field"><span>Value</span><input class="input" name="value" required placeholder="true"></label><button class="btn primary" type="submit">${esc(t('save'))}</button></form></div>
-          <div class="card"><h3 class="title">${esc(t('grantBadge'))}</h3><form id="grantBadgeForm" class="auth-form"><label class="field"><span>UID</span><input class="input" name="uid" required dir="ltr"></label><label class="field"><span>${esc(t('badges'))}</span><select class="input" name="badgeId">${BADGE_DEFS.map(b=>`<option value="${b.id}">${esc(badgeName(b.id))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('grantBadge'))}</button></form></div>
-          <div class="card"><h3 class="title">${esc(t('grantFrame'))}</h3><form id="grantFrameForm" class="auth-form"><label class="field"><span>UID</span><input class="input" name="uid" required dir="ltr"></label><label class="field"><span>${esc(t('frames'))}</span><select class="input" name="frameId">${FRAME_DEFS.map(f=>`<option value="${f.id}">${esc(frameName(f.id))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('grantFrame'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('sendAnnouncement'))}</h3><form id="announceForm" class="auth-form"><label class="field"><span>${esc(t('title'))}</span><input class="input" name="title" required maxlength="160"></label><label class="field"><span>${esc(t('message'))}</span><textarea class="input" name="body" required maxlength="3000"></textarea></label><label class="checkbox-line"><input type="checkbox" name="pinned"><span>${esc(t('pinAnnouncement'))}</span></label><button class="btn primary" type="submit">${esc(t('send'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('featureFlags'))}</h3><form id="flagForm" class="auth-form"><label class="field"><span>Key</span><input class="input" name="key" required placeholder="maintenance" maxlength="80"></label><label class="field"><span>Value</span><input class="input" name="value" required placeholder="true" maxlength="500"></label><button class="btn primary" type="submit">${esc(t('save'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('grantXp'))}</h3><form id="grantXpForm" class="auth-form"><label class="field"><span>${esc(t('targetUid'))}</span><input class="input" name="uid" required dir="ltr" maxlength="128"></label><label class="field"><span>${esc(t('amountXp'))}</span><input class="input" name="amount" type="number" min="1" max="1000000" value="100" required></label><button class="btn primary" type="submit">🎁 ${esc(t('grantXp'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('grantLevel'))}</h3><form id="grantLevelForm" class="auth-form"><label class="field"><span>${esc(t('targetUid'))}</span><input class="input" name="uid" required dir="ltr" maxlength="128"></label><label class="field"><span>${esc(t('targetLevel'))} (1–1000)</span><input class="input" name="level" type="number" min="1" max="1000" value="5" required></label><button class="btn primary" type="submit">${esc(t('grantLevel'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('grantBadge'))}</h3><form id="grantBadgeForm" class="auth-form"><label class="field"><span>${esc(t('targetUid'))}</span><input class="input" name="uid" required dir="ltr" maxlength="128"></label><label class="field"><span>${esc(t('badges'))}</span><select class="input" name="badgeId">${BADGE_DEFS.map(b=>`<option value="${esc(b.id)}">${esc(badgeName(b.id))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('grantBadge'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('grantFrame'))}</h3><form id="grantFrameForm" class="auth-form"><label class="field"><span>${esc(t('targetUid'))}</span><input class="input" name="uid" required dir="ltr" maxlength="128"></label><label class="field"><span>${esc(t('frames'))}</span><select class="input" name="frameId">${FRAME_DEFS.map(f=>`<option value="${esc(f.id)}">${esc(frameName(f.id))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('grantFrame'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('createGlobalChallenge'))}</h3><form id="globalChallengeForm" class="auth-form"><label class="field"><span>${esc(t('challengeTitle'))}</span><input class="input" name="title" required maxlength="160"></label><label class="field"><span>${esc(t('challengeDesc'))}</span><textarea class="input" name="description" maxlength="1000"></textarea></label><label class="field"><span>${esc(t('challengeType'))}</span><select class="input" name="type"><option value="race">${esc(t('race'))}</option><option value="focus">${esc(t('focusChallenge'))}</option><option value="streak">${esc(t('streakChallenge'))}</option><option value="team">${esc(t('teamChallenge'))}</option></select></label><label class="field"><span>${esc(t('goal'))}</span><input class="input" type="number" name="goal" min="1" value="1" required></label><label class="field"><span>${esc(t('rewardXp'))}</span><input class="input" type="number" name="rewardXp" min="0" max="100000" value="100" required></label><label class="field"><span>${esc(t('endsAt'))}</span><input class="input" type="datetime-local" name="endsAt" value="${esc(toLocalInput(addDays(new Date(),3)))}" required></label><button class="btn primary" type="submit">${esc(t('createGlobalChallenge'))}</button></form></div>
+          <div class="card"><h3 class="title">${esc(t('manageAnnouncements'))}</h3><div class="list">${announcements.map(a=>`<div class="list-item"><div class="list-main"><div class="list-title">${a.pinned?'📌 ':''}${esc(a.title||'—')}</div><p class="muted small" style="white-space:pre-wrap">${esc(a.body||'')}</p><div class="meta"><span>${esc(fmtDateTime(a.createdAt))}</span><span class="badge ${a.active===false?'':'done'}">${a.active===false?esc(t('deactivate')):esc(a.pinned?t('pinned'):t('active'))}</span></div></div><div class="row"><button class="btn sm" data-action="toggle-pin-announcement" data-id="${esc(a.id)}">${esc(a.pinned?t('unpin'):t('pinAnnouncement'))}</button><button class="btn sm danger" data-action="hide-announcement" data-id="${esc(a.id)}">${esc(t('deactivate'))}</button></div></div>`).join('')||emptyHtml(t('noData'))}</div></div>
           <div class="card"><h3 class="title">${esc(t('developerLogs'))}</h3><div class="dev-log">${state.developer.logs.length?state.developer.logs.map(l=>`<div class="kv"><span>${esc(l.action)}</span><strong>${esc(fmtDateTime(l.at))}</strong></div>`).join(''):emptyHtml(t('noData'))}</div></div>
-          <div class="card"><h3 class="title">${esc(t('inquiry'))}</h3><div class="list">${(state.developer.inquiries||[]).map(q=>`<div class="list-item"><div class="list-main"><div class="list-title">${esc(q.subject||'—')}</div><div class="muted small">${esc(q.name||'')} • ${esc(q.uid||'')}</div><p>${esc(q.message||'')}</p>${q.developerReply?`<div class="badge done">${esc(q.developerReply)}</div>`:`<button class="btn sm primary" data-action="reply-inquiry" data-id="${q.id}">${esc(t('send'))}</button>`}</div></div>`).join('')||emptyHtml(t('noData'))}</div></div>
+          <div class="card"><div class="row between"><h3 class="title">${esc(t('inquiry'))}</h3><button class="btn sm" data-action="refresh-inquiries">${esc(t('refresh'))}</button></div><div class="list">${(state.developer.inquiries||[]).map(q=>`<div class="list-item"><div class="list-main"><div class="list-title">${esc(q.subject||'—')}</div><div class="muted small">${esc(q.name||'')} • <span dir="ltr">${esc(q.uid||'')}</span></div><p>${esc(q.message||'')}</p>${q.developerReply?`<div class="badge done">${esc(q.developerReply)}</div>`:`<button class="btn sm primary" data-action="reply-inquiry" data-id="${esc(q.id)}">${esc(t('send'))}</button>`}</div></div>`).join('')||emptyHtml(t('noData'))}</div></div>
         </div></div>`;
       }
 
@@ -934,6 +949,9 @@
           case 'delete-all': await deleteAll(); break;
           case 'dev-login': { const fd=new FormData($('#devLoginForm')); const ok=await loginWithEmail(fd.get('email'),fd.get('password'),true); if(ok){ const isDev=await Developer.check(); if(isDev){ modalStack.at(-1)?.close(); } else { await logout(); toast(t('noDeveloperAccess'),'error'); } } break; }
           case 'reply-inquiry': openReplyModal(id); break;
+          case 'refresh-inquiries': await Developer.loadInquiries(); render(); break;
+          case 'toggle-pin-announcement': { if(!state.developer.unlocked)break; const a=(state.announcements||[]).find(x=>x.id===id); if(!a)break; try{await Developer.setAnnouncement(id,{pinned:!a.pinned}); a.pinned=!a.pinned; render(); toast(t('savedMsg'),'success');}catch(err){toast(err.message||t('requiresFirebase'),'error');} break; }
+          case 'hide-announcement': { if(!state.developer.unlocked)break; if(!await confirmModal({title:t('deactivate'),message:t('deactivate'),danger:true}))break; try{await Developer.setAnnouncement(id,{active:false,pinned:false}); state.announcements=state.announcements.filter(x=>x.id!==id); render(); toast(t('savedMsg'),'success');}catch(err){toast(err.message||t('requiresFirebase'),'error');} break; }
           case 'save-reply': { const fd=new FormData($('#replyForm')); await Developer.replyInquiry(id, fd.get('reply')); modalStack.at(-1)?.close(); break; }
         }
       });
@@ -948,10 +966,13 @@
         if(f.id==='profileForm'){ const fd=new FormData(f); state.profile.name=String(fd.get('name')||'').trim(); state.profile.school=String(fd.get('school')||'').trim(); state.settings.accent=fd.get('accent'); if(activeProfile){ activeProfile.name=state.profile.name; activeProfile.color=state.settings.accent; const list=getProfiles(); const i=list.findIndex(p=>p.id===activeProfile.id); if(i>=0){list[i]=activeProfile;saveProfiles(list);} } saveState(); applySettings(); render(); toast(t('savedMsg'),'success'); }
         if(f.id==='settingsForm'){ const fd=new FormData(f); state.settings.lang=fd.get('lang'); state.settings.themeMode=fd.get('themeMode'); state.settings.themePreset=fd.get('themePreset'); state.settings.pomodoro.work=clamp(Math.round(num(fd.get('work'),25)),1,240); state.settings.pomodoro.short=clamp(Math.round(num(fd.get('short'),5)),1,120); state.settings.notifyLead=clamp(Math.round(num(fd.get('notifyLead'),60)),1,1440); state.settings.sound=!!fd.get('sound'); state.settings.vibration=!!fd.get('vibration'); saveState(); applySettings(); render(); toast(t('savedMsg'),'success'); }
         if(f.id==='inquiryForm'){ const fd=new FormData(f); await sendInquiry(fd.get('subject'),fd.get('message')); f.reset(); }
-        if(f.id==='announceForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); await Developer.sendAnnouncement(fd.get('title'),fd.get('body')); f.reset(); }
+        if(f.id==='announceForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.sendAnnouncement(fd.get('title'),fd.get('body'),fd.has('pinned')); f.reset(); render();}catch(err){toast(err.message||t('requiresFirebase'),'error');} }
         if(f.id==='flagForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); const v=fd.get('value'); await Developer.setFlag(fd.get('key'), v==='true'?true:v==='false'?false:v); f.reset(); }
         if(f.id==='grantBadgeForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); await Developer.grantBadge(fd.get('uid'),fd.get('badgeId')); f.reset(); }
-        if(f.id==='grantFrameForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); await Developer.grantFrame(fd.get('uid'),fd.get('frameId')); f.reset(); }
+        if(f.id==='grantFrameForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.grantFrame(fd.get('uid'),fd.get('frameId')); f.reset();}catch(err){toast(err.message||t('requiresFirebase'),'error');} }
+        if(f.id==='grantXpForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.grantXp(String(fd.get('uid')||'').trim(),fd.get('amount')); f.reset();}catch(err){toast(err.message||t('requiresFirebase'),'error');} }
+        if(f.id==='grantLevelForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.setLevel(String(fd.get('uid')||'').trim(),fd.get('level')); f.reset();}catch(err){toast(err.message||t('requiresFirebase'),'error');} }
+        if(f.id==='globalChallengeForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.createGlobalChallenge({title:fd.get('title'),description:fd.get('description'),type:fd.get('type'),goal:num(fd.get('goal'),1),rewardXp:num(fd.get('rewardXp'),100),endsAt:parseDate(fd.get('endsAt'))?.toISOString()||new Date(Date.now()+3*DAY).toISOString()}); f.reset(); await Challenges.fetchCloud(); render();}catch(err){toast(err.message||t('requiresFirebase'),'error');} }
       });
 
       document.addEventListener('input', debounce(e=>{
@@ -974,12 +995,20 @@
       document.addEventListener('dragleave', e=>{ const c=e.target.closest('.kanban-col'); if(c)c.classList.remove('dragover'); });
       document.addEventListener('drop', e=>{ const c=e.target.closest('.kanban-col'); if(!c)return; e.preventDefault(); c.classList.remove('dragover'); const id=e.dataTransfer.getData('text/plain'); const st=c.dataset.status; if(st==='done') Tasks.complete(id); else Tasks.update(id,{status:st}); });
       window.addEventListener('beforeunload', ()=>{ if(activeProfile) saveProfile(activeProfile.id,state); });
-      window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', ()=>{ if(state.settings.themeMode==='auto') applySettings(); });
+      const colorSchemeQuery=window.matchMedia?.('(prefers-color-scheme: dark)');
+      if(colorSchemeQuery?.addEventListener) colorSchemeQuery.addEventListener('change',()=>{ if(state.settings.themeMode==='auto') applySettings(); });
+      else if(colorSchemeQuery?.addListener) colorSchemeQuery.addListener(()=>{ if(state.settings.themeMode==='auto') applySettings(); });
 
       /* =========================
          16) Init
          ========================= */
-      async function registerSW(){ if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){ try{ await navigator.serviceWorker.register('sw.js'); }catch{} } }
+      async function registerSW(){
+        if(!('serviceWorker' in navigator) || !(location.protocol==='https:'||location.hostname==='localhost')) return;
+        try{
+          const registration=await navigator.serviceWorker.register('sw.js');
+          registration.update().catch(()=>{});
+        }catch(e){ console.warn('Service worker unavailable; app can still run online.',e); }
+      }
       async function init(){
         loadLocalPrefs(); bootProfile(); applySettings(); render();
         await initFirebase();
