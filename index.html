@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="author" content="YS" />
-  <meta name="description" content="Munjiz Ultra — مساعد الطالب الذكي للمهام والفرق والتحديات والمتصدرين" />
+  <meta name="description" content="Munjiz Ultra — مساعد الطالب الذكي للمهام والفرق والإنجازات" />
   <meta name="theme-color" content="#2563eb" />
   <link rel="manifest" href="manifest.json" />
   <title>منجز Ultra</title>
@@ -137,7 +137,7 @@
         appId: '1:3482020492:web:72d6f419712c0404a8e9a9'
       };
 
-      const APP = { name:'منجز', version:'2.0.1-ultra', copyright:'© YS — جميع الحقوق محفوظة' };
+      const APP = { name:'منجز', version:'3.1.0-ultra', copyright:'© YS — جميع الحقوق محفوظة' };
       const LS = { profiles:'munjiz.profiles', active:'munjiz.active', prefs:'munjiz.prefs', temp:'munjiz.temp' };
       const DAY = 86400000;
       const STATUS = ['new','inProgress','done'];
@@ -163,7 +163,7 @@
           deepFocus:'تركيز عميق', notifications:'التنبيهات', alerts:'التنبيهات', noAlerts:'لا تنبيهات', markRead:'تعليم كمقروء', enableNotifications:'تفعيل الإشعارات', notificationExplanation:'الإشعارات تعمل أثناء فتح التطبيق فقط في الوضع المحلي.',
           xp:'XP', level:'المستوى', streak:'السلسلة', bestStreak:'أطول سلسلة', heatMap:'خريطة الالتزام', badges:'الأوسمة', frames:'الأطارات', titles:'الألقاب', equip:'تجهيز', equipped:'مُجهَّز', locked:'مقفل', unlocked:'مفتوح',
           levelUp:'مستوى جديد', badgeUnlocked:'وسام جديد', frameUnlocked:'إطار جديد', titleUnlocked:'لقب جديد', tasksCompleted:'مهام منجزة', focusMinutes:'دقائق تركيز', raceWins:'انتصارات', challengeWins:'تحديات',
-          global:'عام', teamLb:'الفريق', refresh:'تحديث', noData:'لا بيانات', createTeam:'إنشاء فريق', joinTeam:'انضمام بكود', teamCode:'كود الفريق', leaveTeam:'مغادرة', deleteTeam:'حذف الفريق',
+          friends:'الأصدقاء والشات', global:'عام', teamLb:'الفريق', refresh:'تحديث', noData:'لا بيانات', createTeam:'إنشاء فريق', joinTeam:'انضمام بكود', teamCode:'كود الفريق', leaveTeam:'مغادرة', deleteTeam:'حذف الفريق',
           teamCreated:'تم إنشاء الفريق', teamJoined:'انضممت للفريق', teamLeft:'غادرت الفريق', invalidTeamCode:'كود غير صحيح', alreadyInTeam:'أنت في الفريق', notInTeam:'لست في الفريق',
           newChallenge:'تحدي جديد', challengeTitle:'عنوان التحدي', challengeDesc:'وصف التحدي', challengeType:'النوع', race:'سباق', focusChallenge:'تركيز', streakChallenge:'التزام', teamChallenge:'فريق',
           joinChallenge:'انضمام', submitChallenge:'تسليم', challengeJoined:'انضممت', challengeSubmitted:'تم التسليم', challengeWon:'فزت! 🏆', endsAt:'ينتهي', goal:'الهدف', rewardXp:'مكافأة XP',
@@ -196,7 +196,7 @@
           deepFocus:'Deep focus', notifications:'Notifications', alerts:'Alerts', noAlerts:'No alerts', markRead:'Mark read', enableNotifications:'Enable notifications', notificationExplanation:'Notifications work while app is open in local mode.',
           xp:'XP', level:'Level', streak:'Streak', bestStreak:'Best streak', heatMap:'Heat map', badges:'Badges', frames:'Frames', titles:'Titles', equip:'Equip', equipped:'Equipped', locked:'Locked', unlocked:'Unlocked',
           levelUp:'Level up', badgeUnlocked:'Badge unlocked', frameUnlocked:'Frame unlocked', titleUnlocked:'Title unlocked', tasksCompleted:'Tasks completed', focusMinutes:'Focus minutes', raceWins:'Race wins', challengeWins:'Challenges',
-          global:'Global', teamLb:'Team', refresh:'Refresh', noData:'No data', createTeam:'Create team', joinTeam:'Join by code', teamCode:'Team code', leaveTeam:'Leave', deleteTeam:'Delete team',
+          friends:'Friends & Chat', global:'Global', teamLb:'Team', refresh:'Refresh', noData:'No data', createTeam:'Create team', joinTeam:'Join by code', teamCode:'Team code', leaveTeam:'Leave', deleteTeam:'Delete team',
           teamCreated:'Team created', teamJoined:'Joined team', teamLeft:'Left team', invalidTeamCode:'Invalid code', alreadyInTeam:'Already in team', notInTeam:'Not in team',
           newChallenge:'New challenge', challengeTitle:'Title', challengeDesc:'Description', challengeType:'Type', race:'Race', focusChallenge:'Focus', streakChallenge:'Streak', teamChallenge:'Team',
           joinChallenge:'Join', submitChallenge:'Submit', challengeJoined:'Joined', challengeSubmitted:'Submitted', challengeWon:'Won! 🏆', endsAt:'Ends', goal:'Goal', rewardXp:'Reward XP',
@@ -283,7 +283,7 @@
         auth:{provider:'guest',uid:'guest',displayName:'',email:'',photoURL:''},
         profile:{name:'',school:'',avatarColor:'#2563eb',photo:''},
         settings:{lang:'ar',themeMode:'auto',themePreset:'ocean',accent:'#2563eb',pomodoro:{work:25,short:5,long:15,cycle:4},notifyLead:60,sound:true,vibration:true},
-        subjects:[], tasks:[], groups:[], teams:[], activeTeamId:null, sessions:[],
+        subjects:[], tasks:[], groups:[], teams:[], activeTeamId:null, sessions:[], social:{friends:[],requests:[],messages:[],selectedFriend:null,query:'',presence:{}},
         game:{xp:0,level:1,streak:0,bestStreak:0,studyDates:[],badges:{},frames:{unlocked:['none'],equipped:'none'},titles:{unlocked:['student'],equipped:'student'},raceWins:0,challengeWins:0,firstCompletionDate:'',firstCompletionAt:null},
         challenges:{local:[],cloud:[]}, leaderboard:{cache:[],updatedAt:null,tab:'global'},
         developer:{unlocked:false,logs:[],flags:{},inquiries:[]}, announcements:[], notifications:{seen:{}}, activeFocus:null,
@@ -301,6 +301,8 @@
           tags:Array.isArray(x.tags)?x.tags.map(String).slice(0,10):[], notes:String(x.notes||''), subtasks,
           repeat:['none','daily','weekly','custom'].includes(x.repeat)?x.repeat:'none', repeatInterval:Math.max(1,Math.round(num(x.repeatInterval,7))),
           createdAt:x.createdAt||iso(), updatedAt:x.updatedAt||iso(), completedAt:x.status==='done'?(x.completedAt||iso()):null,
+          // Keep the reward claim on the task so reopening/re-completing it cannot award XP again.
+          rewardClaimed:x.rewardClaimed===undefined ? x.status==='done' : !!x.rewardClaimed, xpRewardedAt:x.xpRewardedAt||null, xpRewarded:Math.max(0,Math.round(num(x.xpRewarded,0))),
           progress:x.status==='done'?100:subtasks.length?Math.round(done/subtasks.length*100):(x.status==='inProgress'?30:0)
         };
       }
@@ -336,6 +338,8 @@
         out.tasks=Array.isArray(s.tasks)?s.tasks.map(normalizeTask):[];
         out.groups=Array.isArray(s.groups)?s.groups.map(normalizeGroup):[];
         out.teams=Array.isArray(s.teams)?s.teams.map(normalizeTeam):[];
+        out.social={friends:[],requests:[],messages:[],selectedFriend:null,query:'',presence:{},...(s.social||{})};
+        for(const k of ['friends','requests','messages']) out.social[k]=Array.isArray(out.social[k])?out.social[k]:[];
         out.sessions=Array.isArray(s.sessions)?s.sessions.map(normalizeSession):[];
         out.challenges={local:Array.isArray(s.challenges?.local)?s.challenges.local.map(normalizeChallenge):[],cloud:Array.isArray(s.challenges?.cloud)?s.challenges.cloud.map(normalizeChallenge):[]};
         out.leaderboard={...DEFAULT_STATE.leaderboard,...(s.leaderboard||{})};
@@ -401,7 +405,7 @@
       /* =========================
          5) Firebase
          ========================= */
-      const fb={ready:false,app:null,auth:null,db:null};
+      const fb={ready:false,app:null,auth:null,db:null,functions:null};
       let syncTimer=null, publishTimer=null, liveUnsubscribers=[];
       function hasFirebaseConfig(){ return !!(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.projectId); }
       function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.async=true; s.onload=res; s.onerror=()=>rej(new Error(src)); document.head.appendChild(s); }); }
@@ -412,11 +416,12 @@
             await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
             await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js');
             await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js');
+            await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js');
           }
           fb.app=(firebase.apps && firebase.apps.length)
             ? firebase.app()
             : firebase.initializeApp(FIREBASE_CONFIG);
-          fb.auth=fb.app.auth(); fb.db=fb.app.firestore();
+          fb.auth=fb.app.auth(); fb.db=fb.app.firestore(); fb.functions=fb.app.functions();
           try{ await fb.db.enablePersistence({synchronizeTabs:true}); }catch(e){ /* Persistence is optional: private browsing or multiple tabs may disable it. */ }
           fb.ready=true; return true;
         }catch(e){ console.warn('Firebase initialization failed; local mode remains available.',e); return false; }
@@ -435,10 +440,37 @@
         if(activeProfile) saveProfile(activeProfile.id,state);
         localStorage.removeItem(LS.active); activeProfile=null; state=normalizeState({settings:state.settings}); window.__state=state; render(); toast(t('loggedOut'),'success');
       }
-      function scheduleSync(){ if(!fb.ready || state.auth.provider!=='firebase') return; clearTimeout(syncTimer); syncTimer=setTimeout(pushCloud,1200); }
-      async function pushCloud(){
+      function scheduleSync(){
         if(!fb.ready || state.auth.provider!=='firebase' || !state.auth.uid || state.auth.uid==='guest') return;
-        try{ const clean=JSON.parse(JSON.stringify(state)); clean.developer={unlocked:false,logs:[],flags:{},inquiries:[]}; await fb.db.collection('users').doc(state.auth.uid).collection('data').doc('main').set({state:clean,updatedAt:state.updatedAt},{merge:true}); }catch(e){ console.warn(e); }
+        clearTimeout(syncTimer);
+        syncTimer=setTimeout(()=>{ pushCloud().catch(e=>console.warn('Cloud sync failed; local progress remains saved.',e)); },1200);
+      }
+      async function pushCloud(){
+        if(!fb.ready || state.auth.provider!=='firebase' || !state.auth.uid || state.auth.uid==='guest') return false;
+        try{
+          // Local storage is updated synchronously by saveState(); this cloud copy preserves
+          // XP, level, badges, unlocked items, task completion claims, streaks and sessions.
+          const clean=JSON.parse(JSON.stringify(state));
+          // XP/level are server-owned. Keep the cloud's authoritative values while syncing other state.
+          const mainRef=fb.db.collection('users').doc(state.auth.uid).collection('data').doc('main');
+          const statsRef=fb.db.collection('userStats').doc(state.auth.uid);
+          const [statsSnap, mainSnap]=await Promise.all([statsRef.get(), mainRef.get()]);
+          const oldGame=mainSnap.exists ? ((mainSnap.data().state||{}).game||{}) : {};
+          const trusted=statsSnap.exists ? statsSnap.data() : {xp:num(oldGame.xp,0),level:Math.max(1,num(oldGame.level,1))};
+          clean.game=clean.game||{}; clean.game.xp=Math.max(0,Math.round(num(trusted.xp,0))); clean.game.level=Math.max(1,Math.round(num(trusted.level,1)));
+          // Developer authorization/logs are deliberately not persisted as user-editable state.
+          clean.developer={unlocked:false,logs:[],flags:{},inquiries:[]};
+          await mainRef.set({state:clean,updatedAt:state.updatedAt},{merge:true});
+          return true;
+        }catch(e){
+          console.warn('Cloud progress sync failed; local progress remains saved.',e);
+          // Retry transient connectivity/rules errors without blocking the UI.
+          if(fb.ready && state.auth.provider==='firebase' && state.auth.uid!=='guest'){
+            clearTimeout(syncTimer);
+            syncTimer=setTimeout(()=>{ pushCloud().catch(err=>console.warn('Cloud sync retry failed.',err)); },4000);
+          }
+          return false;
+        }
       }
       async function pullCloud(){
         if(!fb.ready || state.auth.provider!=='firebase' || !state.auth.uid || state.auth.uid==='guest') return;
@@ -452,8 +484,8 @@
         clearTimeout(publishTimer); publishTimer=setTimeout(async()=>{
           try{
             await fb.db.collection('publicProfiles').doc(state.auth.uid).set({
-              displayName:state.profile.name||state.auth.displayName||'Student', avatarColor:state.profile.avatarColor||'#2563eb', photo:state.auth.photoURL||'',
-              title:titleName(state.game.titles.equipped), frame:state.game.frames.equipped||'none', xp:state.game.xp, level:state.game.level, streak:state.game.streak, bestStreak:state.game.bestStreak,
+              profileId:state.auth.uid, accountId:state.auth.uid, displayName:state.profile.name||state.auth.displayName||'Student', avatarColor:state.profile.avatarColor||'#2563eb', photo:state.auth.photoURL||'',
+              title:titleName(state.game.titles.equipped), frame:state.game.frames.equipped||'none', streak:state.game.streak, bestStreak:state.game.bestStreak,
               tasksCompleted:state.tasks.filter(x=>x.status==='done').length, focusMinutes:Math.round(completedSessions().reduce((s,x)=>s+x.actualSec/60,0)),
               raceWins:state.game.raceWins, challengeWins:state.game.challengeWins, firstCompletionDate:state.game.firstCompletionDate||'', firstCompletionAt:state.game.firstCompletionAt||null,
               badgesCount:Object.keys(state.game.badges||{}).length, updatedAt:iso(), public:true
@@ -463,13 +495,14 @@
       }
       async function handleAuthUser(user){
         if(!fb.ready) return;
+        if(user){ const isBanned=await checkAccountBan(user.uid); if(isBanned)return; }
         if(!user){ if(state.auth.provider==='firebase'){ state.developer.unlocked=false; saveState(false); render(); } return; }
         const list=getProfiles(); let p=list.find(x=>x.uid===user.uid);
         if(!p) p=createProfile({name:user.displayName||user.email||'Account',color:randomColor(),email:user.email||'',photoURL:user.photoURL||'',provider:user.providerData?.[0]?.providerId||'password',uid:user.uid,settings:state.settings});
         switchProfile(p.id);
         state.auth={provider:'firebase',uid:user.uid,displayName:user.displayName||'',photoURL:user.photoURL||'',email:user.email||''};
         state.profile.name=state.profile.name||p.name; state.profile.avatarColor=p.color; saveState();
-        await Developer.check(); await pullCloud(); await Teams.fetch(); await Challenges.fetchCloud(); await Leaderboard.fetch(state.ui.leaderboardTab||'global'); subscribeLive(); publishProfileToCloud(); render();
+        await Developer.check(); await pullCloud(); await Teams.fetch(); await Challenges.fetchCloud(); await Leaderboard.fetch(state.ui.leaderboardTab||'global'); subscribeLive(); publishProfileToCloud(); Social.startPresence(); if(state.ui.view==='friends'){Social.refresh();} render();
       }
       function watchAuth(){ if(fb.ready) fb.auth.onAuthStateChanged(handleAuthUser); }
 
@@ -495,8 +528,14 @@
         async setFlag(key,value){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('developer').doc('flags').set({[key]:value},{merge:true}); this.log('flag',{key,value}); toast(t('savedMsg'),'success'); },
         async grantBadge(targetUid,badgeId){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('userBadges').doc(targetUid).collection('badges').doc(badgeId).set({grantedAt:iso(),by:'YS'}); this.log('grantBadge',{targetUid,badgeId}); toast(t('savedMsg'),'success'); },
         async grantFrame(targetUid,frameId){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('userFrames').doc(targetUid).set({frames:firebase.firestore.FieldValue.arrayUnion(frameId)},{merge:true}); this.log('grantFrame',{targetUid,frameId}); toast(t('savedMsg'),'success'); },
+        async setBan(targetUid,banned,reason=''){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const id=String(targetUid||'').trim(); if(!/^[A-Za-z0-9_-]{8,128}$/.test(id))throw new Error('معرّف الحساب غير صحيح'); if(id===fb.auth.currentUser.uid)throw new Error('لا يمكن حظر حساب المطور الحالي'); const ref=fb.db.collection('bannedUsers').doc(id); if(banned) await ref.set({uid:id,banned:true,reason:String(reason||'').slice(0,500),by:fb.auth.currentUser.uid,at:iso(),appealAllowed:true},{merge:true}); else await ref.delete(); this.log(banned?'ban-user':'unban-user',{targetUid:id,reason:String(reason||'').slice(0,120)}); toast(banned?'تم حظر الحساب':'تم رفع الحظر','success'); },
+        async setModerator(targetUid,enabled){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const id=String(targetUid||'').trim(); if(!/^[A-Za-z0-9_-]{8,128}$/.test(id)||id===fb.auth.currentUser.uid)throw new Error('معرّف الحساب غير صحيح'); const ref=fb.db.collection('moderators').doc(id); if(enabled)await ref.set({uid:id,role:'moderator',active:true,by:fb.auth.currentUser.uid,at:iso()},{merge:true});else await ref.delete(); this.log(enabled?'grant-moderator':'revoke-moderator',{targetUid:id}); toast(enabled?'تم منح صلاحية المشرف':'تم سحب صلاحية المشرف','success'); },
+        async createCatalogItem(type,data){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const allowed=['achievements','customBadges','customFrames','customTitles','awards']; if(!allowed.includes(type))throw new Error('Invalid catalog'); const title=String(data.title||'').trim().slice(0,100); if(!title)throw new Error('اكتب الاسم'); const xp=clamp(Math.round(num(data.xp,0)),0,100000); const payload={title,description:String(data.description||'').slice(0,500),xp,condition:String(data.condition||'manual').slice(0,200),active:true,createdAt:iso(),createdBy:fb.auth.currentUser.uid}; const ref=await fb.db.collection('gameCatalog').doc(type).collection('items').add(payload); this.log('catalog-create',{type,id:ref.id,title,xp}); toast('تمت إضافة العنصر إلى الكتالوج','success'); return ref.id; },
+        async setBranding(name,logo){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); const clean=String(name||'').trim().slice(0,60)||'منجز Ultra'; const payload={name:clean,logo:String(logo||'').trim().slice(0,500),updatedAt:iso(),updatedBy:fb.auth.currentUser.uid}; await fb.db.collection('developer').doc('branding').set(payload,{merge:true}); applyBranding(payload); this.log('branding',payload); toast('تم حفظ هوية التطبيق','success'); },
+        async loadBanned(){ if(!state.developer.unlocked||!fb.ready)return []; const snap=await fb.db.collection('bannedUsers').orderBy('at','desc').limit(100).get(); return snap.docs.map(d=>({id:d.id,...d.data()})); },
         async loadInquiries(){ if(!state.developer.unlocked||!fb.ready)return; try{ const snap=await fb.db.collection('inquiries').orderBy('createdAt','desc').limit(50).get(); state.developer.inquiries=snap.docs.map(d=>({id:d.id,...d.data()})); saveState(false); if(state.ui.view==='developer') render(); }catch{} },
-        async replyInquiry(id,reply){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('inquiries').doc(id).update({developerReply:reply,status:'answered',answeredAt:iso()}); this.log('reply',{id}); toast(t('savedMsg'),'success'); this.loadInquiries(); }
+        async replyInquiry(id,reply){ if(!state.developer.unlocked||!fb.ready)return; await fb.db.collection('inquiries').doc(id).update({developerReply:reply,status:'answered',answeredAt:iso()}); this.log('reply',{id}); toast(t('savedMsg'),'success'); this.loadInquiries(); },
+        async setInquiryStatus(id,status){ if(!state.developer.unlocked||!fb.ready)throw new Error('Developer access/Firebase required'); if(!['open','closed','answered'].includes(status))throw new Error('Invalid ticket status'); await fb.db.collection('inquiries').doc(id).update({status,updatedAt:iso()}); this.log('ticket-status',{id,status}); await this.loadInquiries(); }
       };
       function openDeveloperAccessModal(){
         if(!fb.ready){ toast(t('requiresFirebase'),'warn'); return; }
@@ -512,12 +551,15 @@
           saveState(false); Gamification.checkBadges();
         }catch(e){ console.warn(e); }
       }
+      function applyBranding(data){ if(!data)return; const name=String(data.name||'').slice(0,60); if(name){document.title=name; const el=document.querySelector('[data-app-brand]'); if(el)el.textContent=name;} if(data.logo){const iconLink=document.querySelector('link[rel="icon"]'); if(iconLink && /^https:\/\//i.test(data.logo))iconLink.href=data.logo;} }
+      async function checkAccountBan(uid){ if(!fb.ready||!uid)return false; try{const snap=await fb.db.collection('bannedUsers').doc(uid).get(); if(!snap.exists||snap.data().banned!==true)return false; const d=snap.data()||{}; await logout(); openModal({title:'الحساب موقوف',size:'sm',dismissible:true,body:`<p>تم إيقاف هذا الحساب مؤقتًا.</p><p class="muted">السبب: ${esc(d.reason||'غير محدد')}</p><p>إذا كنت ترى أن الإيقاف غير صحيح، تواصل مع المختصين من قناة الدعم الخارجية الخاصة بالتطبيق وأرفق معرّف الحساب:</p><code dir="ltr">${esc(uid)}</code>`,footer:`<button class="btn primary" data-close>حسنًا</button>`}); return true;}catch(e){console.warn('Ban status check failed',e);return false;} }
       function subscribeLive(){
         if(!fb.ready || state.auth.provider!=='firebase') return;
         liveUnsubscribers.forEach(u=>u&&u()); liveUnsubscribers=[];
         try{
           liveUnsubscribers.push(fb.db.collection('announcements').orderBy('createdAt','desc').limit(10).onSnapshot(snap=>{ state.announcements=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.active); saveState(false); if(state.ui.view==='home')render(); }));
           liveUnsubscribers.push(fb.db.collection('developer').doc('flags').onSnapshot(doc=>{ if(doc.exists){ state.developer.flags=doc.data()||{}; saveState(false); applyFeatureFlags(); } }));
+          liveUnsubscribers.push(fb.db.collection('developer').doc('branding').onSnapshot(doc=>{if(doc.exists)applyBranding(doc.data());}));
         }catch(e){ console.warn(e); }
       }
       let maintenanceShown=false;
@@ -557,10 +599,35 @@
       function badgeName(id){ const b=BADGE_DEFS.find(x=>x.id===id); return b?(state.settings.lang==='ar'?b.ar:b.en):id; }
       let badgeLock=false;
       const Gamification={
-        addXp(amount,skip=false){ const before=levelFromXp(state.game.xp); state.game.xp=Math.max(0,Math.round(state.game.xp+Math.max(0,amount))); state.game.level=levelFromXp(state.game.xp); if(state.game.level>before){ toast(`${t('levelUp')}: ${state.game.level}`,'success'); this.unlockFramesByLevel(); this.unlockTitlesByLevel(); } if(!skip) this.checkBadges(); saveState(); publishProfileToCloud(); },
+        addXp(amount,skip=false){
+          let earned=Math.max(0,Math.floor(Number(amount)||0));
+          const dx=state.developer.flags?.doubleXp;
+          if(dx && (dx===true || (typeof dx==='object' && (!dx.endsAt || Date.parse(dx.endsAt)>Date.now()) && (!dx.startsAt || Date.parse(dx.startsAt)<=Date.now())))) earned*=2;
+          if(fb.ready && state.auth.provider==='firebase' && state.auth.uid && state.auth.uid!=='guest'){
+            if(!fb.functions){ toast('تعذر الاتصال بخدمة النقاط الآمنة.','error'); return; }
+            const eventId=(typeof crypto!=='undefined'&&crypto.randomUUID)?crypto.randomUUID().replace(/-/g,''):uid().replace(/-/g,'');
+            fb.functions.httpsCallable('awardStudyReward')({reason: earned>=25?'task':'focus',eventId,requestedAmount:Math.min(earned,25)})
+              .then(({data})=>{ const before=levelFromXp(state.game.xp); state.game.xp=Math.max(0,Math.round(num(data.xp,0))); state.game.level=Math.max(1,Math.round(num(data.level,1))); if(state.game.level>before){toast(`${t('levelUp')}: ${state.game.level}`,'success');this.unlockFramesByLevel();this.unlockTitlesByLevel();} if(!skip)this.checkBadges(); saveState(false); publishProfileToCloud(); })
+              .catch(e=>{console.warn('Secure XP award failed',e);toast('لم تُحفظ النقاط على السحابة. حاول مرة أخرى.','error');});
+            return;
+          }
+          const before=levelFromXp(state.game.xp); state.game.xp=Math.max(0,Math.round(state.game.xp+earned)); state.game.level=levelFromXp(state.game.xp); if(state.game.level>before){ toast(`${t('levelUp')}: ${state.game.level}`,'success'); this.unlockFramesByLevel(); this.unlockTitlesByLevel(); } if(!skip) this.checkBadges(); saveState(); publishProfileToCloud();
+        },
         markStudyDay(){ const k=dateKey(new Date()); if(!state.game.studyDates.includes(k)) state.game.studyDates.push(k); this.updateStreak(); },
         updateStreak(){ const dates=new Set(state.game.studyDates); let cur=dateKey(new Date()); if(!dates.has(cur)) cur=dateKey(addDays(new Date(),-1)); let c=0; while(dates.has(cur)){ c++; cur=dateKey(addDays(parseDate(cur+'T00:00')||new Date(),-1)); } state.game.streak=c; state.game.bestStreak=Math.max(state.game.bestStreak||0,c); },
-        completeTaskReward(task){ let xp=20+(task.priority==='high'?15:task.priority==='medium'?8:0)+task.subtasks.filter(s=>s.done).length*3; this.recordFirstCompletion(); this.markStudyDay(); this.addXp(xp); celebrate(); },
+        completeTaskReward(task){
+          // This method is called only after the task has been marked as completed.
+          // Persist the claim before any asynchronous cloud sync to prevent double taps from farming XP.
+          if(!task || task.status!=='done' || task.rewardClaimed) return 0;
+          // Clamp every input and mark the reward claim synchronously before XP mutation.
+          const subtasks=Array.isArray(task.subtasks)?task.subtasks:[];
+          const priorityBonus=task.priority==='high'?15:(task.priority==='medium'?8:0);
+          const xp=clamp(Math.round(20+priorityBonus+subtasks.filter(s=>s&&s.done).length*3),1,500);
+          task.rewardClaimed=true; task.xpRewarded=xp; task.xpRewardedAt=iso(); task.updatedAt=iso();
+          saveState(false);
+          this.recordFirstCompletion(); this.markStudyDay(); this.addXp(xp);
+          toast(`+${xp} XP`,'success'); celebrate(); return xp;
+        },
         focusReward(sec){ this.markStudyDay(); this.addXp(Math.max(1,Math.round(sec/60))); },
         recordFirstCompletion(){ const today=dateKey(new Date()); if(state.game.firstCompletionDate!==today){ state.game.firstCompletionDate=today; state.game.firstCompletionAt=iso(); } },
         unlockFrame(id){ if(!FRAME_DEFS.some(f=>f.id===id)) return; if(!state.game.frames.unlocked.includes(id)){ state.game.frames.unlocked.push(id); toast(`${t('frameUnlocked')}: ${frameName(id)}`,'success'); saveState(false); } },
@@ -574,6 +641,28 @@
         checkBadges(){ if(badgeLock) return; badgeLock=true; BADGE_DEFS.forEach(b=>{ try{ if(!state.game.badges[b.id] && b.check()){ state.game.badges[b.id]={at:iso()}; toast(`${t('badgeUnlocked')}: ${badgeName(b.id)}`,'success'); this.unlockFrameByBadge(b.id); this.unlockTitleByBadge(b.id); this.addXp(b.xp||20,true); } }catch{} }); badgeLock=false; saveState(false); }
       };
 
+
+      /* Daily quests rotate by local calendar day and are idempotently rewarded per user/day. */
+      const DailyQuests={
+        today(){return dateKey(new Date());},
+        definitions(){
+          const tasks=state.tasks.filter(x=>x.status==='done'), today=this.today();
+          const doneToday=tasks.filter(x=>x.completedAt&&dateKey(parseDate(x.completedAt))===today).length;
+          const focusToday=completedSessions().filter(x=>x.startedAt&&dateKey(new Date(x.startedAt))===today).reduce((n,x)=>n+Math.floor((x.actualSec||0)/60),0);
+          const createdToday=state.tasks.filter(x=>x.createdAt&&dateKey(parseDate(x.createdAt))===today).length;
+          const subToday=tasks.filter(x=>x.completedAt&&dateKey(parseDate(x.completedAt))===today).reduce((n,x)=>n+(x.subtasks||[]).length,0);
+          return [
+            {id:'daily_task_1',title:'أنجز مهمة واحدة',description:'أكمل أي مهمة دراسية اليوم',goal:1,progress:doneToday,xp:35},
+            {id:'daily_task_3',title:'إنجاز 3 مهام',description:'أكمل ثلاث مهام اليوم',goal:3,progress:doneToday,xp:70},
+            {id:'daily_focus_25',title:'جلسة تركيز',description:'اجمع 25 دقيقة تركيز اليوم',goal:25,progress:focusToday,xp:45},
+            {id:'daily_subtasks_3',title:'خطوات صغيرة',description:'أكمل 3 خطوات فرعية من مهامك اليوم',goal:3,progress:subToday,xp:40},
+            {id:'daily_plan',title:'خطط ليومك',description:'أنشئ مهمة جديدة اليوم',goal:1,progress:createdToday,xp:20}
+          ];
+        },
+        data(){const day=this.today(); if(!state.game.dailyQuests||state.game.dailyQuests.date!==day) state.game.dailyQuests={date:day,claimed:{}}; if(!state.game.dailyQuests.claimed)state.game.dailyQuests.claimed={}; return state.game.dailyQuests;},
+        claim(id){const q=this.definitions().find(x=>x.id===id),d=this.data(); if(!q||q.progress<q.goal||d.claimed[id]){toast(d.claimed[id]?'المكافأة مستلمة بالفعل':'أكمل المهمة أولًا','warn');return;} d.claimed[id]=iso(); saveState(); Gamification.addXp(q.xp); publishProfileToCloud(); render(); toast(`تم استلام ${q.xp} XP`,'success');}
+      };
+
       /* =========================
          8) Services
          ========================= */
@@ -582,7 +671,21 @@
         create(data){ const task=normalizeTask(data); state.tasks.unshift(task); saveState(); Gamification.checkBadges(); return task; },
         update(id,patch){ const x=taskById(id); if(!x)return; Object.assign(x,patch); Object.assign(x,normalizeTask(x)); saveState(); },
         remove(id){ const i=state.tasks.findIndex(x=>x.id===id); if(i<0)return; const item=state.tasks[i]; state.tasks.splice(i,1); saveState(); undoFn=()=>{state.tasks.splice(i,0,item);saveState();render();}; toast(t('deleted'),'info',{label:t('undo'),action:'undo'}); },
-        complete(id){ const x=taskById(id); if(!x||x.status==='done')return; x.status='done'; x.completedAt=iso(); x.subtasks.forEach(s=>s.done=true); x.progress=100; Gamification.completeTaskReward(x); if(x.repeat!=='none' && x.dueAt){ const days=x.repeat==='daily'?1:x.repeat==='weekly'?7:x.repeatInterval; state.tasks.unshift(normalizeTask({...x,id:uid(),status:'new',completedAt:null,dueAt:new Date(parseDate(x.dueAt).getTime()+days*DAY).toISOString(),subtasks:x.subtasks.map(s=>({id:uid(),title:s.title,done:false})),progress:0,actualMin:0})); toast(t('nextOccurrence'),'info'); } saveState(); Gamification.checkBadges(); render(); toast(t('taskCompleted'),'success'); },
+        complete(id){
+          const x=taskById(id); if(!x||x.status==='done')return false;
+          x.status='done'; x.completedAt=iso(); x.subtasks.forEach(s=>s.done=true); x.progress=100;
+          Gamification.completeTaskReward(x);
+          if(x.repeat!=='none' && x.dueAt){
+            const days=x.repeat==='daily'?1:x.repeat==='weekly'?7:x.repeatInterval;
+            state.tasks.unshift(normalizeTask({...x,id:uid(),status:'new',completedAt:null,rewardClaimed:false,xpRewardedAt:null,xpRewarded:0,dueAt:new Date(parseDate(x.dueAt).getTime()+days*DAY).toISOString(),subtasks:x.subtasks.map(s=>({id:uid(),title:s.title,done:false})),progress:0,actualMin:0}));
+            toast(t('nextOccurrence'),'info');
+          }
+          saveState(); Gamification.checkBadges(); saveState(); render(); toast(t('taskCompleted'),'success');
+          // Persist the task claim, XP and unlocked achievements to the signed-in account immediately.
+          // UI feedback is instant; the local copy is already saved even if the network is offline.
+          if(fb.ready && state.auth.provider==='firebase') pushCloud().catch(err=>console.warn('Immediate task reward sync failed; local copy is saved.',err));
+          publishProfileToCloud(); return true;
+        },
         toggle(id){ const x=taskById(id); if(!x)return; if(x.status==='done') Tasks.update(id,{status:'new',completedAt:null}); else Tasks.complete(id); }
       };
       const Subjects={ upsert(d){ const s=normalizeSubject(d); const i=state.subjects.findIndex(x=>x.id===s.id); if(i>=0)state.subjects[i]=s; else state.subjects.push(s); saveState(); return s; }, remove(id){ state.tasks.forEach(t=>{if(t.subjectId===id)t.subjectId=null;}); state.subjects=state.subjects.filter(x=>x.id!==id); saveState(); toast(t('deleted'),'success'); } };
@@ -595,6 +698,42 @@
         setActive(id){ state.activeTeamId=id; saveState(); render(); },
         async fetch(){ if(!fb.ready || state.auth.provider!=='firebase' || !state.auth.uid)return; try{ const snap=await fb.db.collection('teams').where('memberIds','array-contains',state.auth.uid).limit(50).get(); const cloud=snap.docs.map(d=>normalizeTeam({id:d.id,...d.data()})); state.teams=[...cloud,...state.teams.filter(t=>!t.shared)]; if(state.activeTeamId && !state.teams.some(t=>t.id===state.activeTeamId)) state.activeTeamId=state.teams[0]?.id||null; saveState(false); }catch(e){ console.warn(e); } }
       };
+      /* =========================
+         Friends, live presence and direct/team chat
+         Firestore collections: friendRequests, friendships, presence, chats/{chatId}/messages, teams/{id}/messages
+         ========================= */
+      let socialUnsubs=[]; let presenceTimer=null; let socialBusy=false;
+      const Social={
+        uid(){return state.auth.provider==='firebase'&&fb.auth.currentUser?fb.auth.currentUser.uid:null;},
+        requireCloud(){if(!fb.ready||!this.uid())throw new Error('سجّل الدخول بحساب Firebase لاستخدام الأصدقاء والشات');},
+        chatId(a,b){return [String(a),String(b)].sort().join('__');},
+        async search(q){this.requireCloud(); q=String(q||'').trim().toLowerCase(); if(q.length<2){toast('اكتب اسمًا أو معرّفًا من حرفين على الأقل','warn');return;} const uid=this.uid(); const out=[];
+          try{const snap=await fb.db.collection('publicProfiles').limit(100).get(); snap.forEach(d=>{const x=d.data()||{}, name=String(x.displayName||''); if(d.id!==uid&&(name.toLowerCase().includes(q)||d.id.toLowerCase()===q))out.push({uid:d.id,name,level:x.level||1,xp:x.xp||0,online:!!x.online,updatedAt:x.updatedAt});});
+          }catch(e){throw new Error('تعذر البحث؛ تحقق من قواعد قراءة publicProfiles');} state.social.searchResults=out.slice(0,20); render();},
+        async sendRequest(target){this.requireCloud(); const me=this.uid(), to=String(target||''); if(!to||to===me)throw new Error('لا يمكنك إضافة نفسك'); const existing=await fb.db.collection('friendships').doc(this.chatId(me,to)).get(); if(existing.exists){toast('أنتما صديقان بالفعل','info');return;} const id=me+'__'+to; await fb.db.collection('friendRequests').doc(id).set({from:me,to,fromName:state.profile.name||'طالب',status:'pending',createdAt:iso()}); toast('تم إرسال طلب الصداقة','success'); await this.refresh();},
+        async refresh(){if(!this.uid()||!fb.ready)return; const me=this.uid(); try{const [fr,inc,out]=await Promise.all([fb.db.collection('friendships').where('members','array-contains',me).limit(100).get(),fb.db.collection('friendRequests').where('to','==',me).where('status','==','pending').limit(50).get(),fb.db.collection('friendRequests').where('from','==',me).where('status','==','pending').limit(50).get()]);
+          const friends=[]; for(const d of fr.docs){const x=d.data()||{}, other=(x.members||[]).find(v=>v!==me);if(other){let pub={};try{const p=await fb.db.collection('publicProfiles').doc(other).get();if(p.exists)pub=p.data();}catch{} friends.push({uid:other,name:pub.displayName||other,online:!!pub.online,level:pub.level||1,xp:pub.xp||0,close:!!(x.closeFriends||[]).includes(me)});}}
+          state.social.friends=friends; state.social.requests=[...inc.docs.map(d=>({id:d.id,...d.data(),incoming:true})),...out.docs.map(d=>({id:d.id,...d.data(),incoming:false}))]; render();
+        }catch(e){console.warn('Social refresh failed',e);}},
+        async accept(requestId){this.requireCloud(); const me=this.uid(), ref=fb.db.collection('friendRequests').doc(requestId); await fb.db.runTransaction(async tx=>{const snap=await tx.get(ref);if(!snap.exists)throw new Error('الطلب غير موجود');const d=snap.data();if(d.to!==me||d.status!=='pending')throw new Error('لا يمكن قبول هذا الطلب');tx.update(ref,{status:'accepted',acceptedAt:iso()});tx.set(fb.db.collection('friendships').doc(this.chatId(d.from,d.to)),{members:[d.from,d.to],closeFriends:[],createdAt:iso(),updatedAt:iso()},{merge:true});});toast('تم قبول طلب الصداقة','success');await this.refresh();},
+        async decline(requestId){this.requireCloud(); const ref=fb.db.collection('friendRequests').doc(requestId),snap=await ref.get();if(!snap.exists||snap.data().to!==this.uid())throw new Error('الطلب غير صالح');await ref.update({status:'declined',updatedAt:iso()});await this.refresh();},
+        async toggleClose(other){this.requireCloud(); const me=this.uid(),ref=fb.db.collection('friendships').doc(this.chatId(me,other)); await fb.db.runTransaction(async tx=>{const snap=await tx.get(ref);if(!snap.exists)throw new Error('الصداقة غير موجودة');const d=snap.data(), arr=Array.isArray(d.closeFriends)?d.closeFriends:[], next=arr.includes(me)?arr.filter(x=>x!==me):[...arr,me];tx.update(ref,{closeFriends:next,updatedAt:iso()});});await this.refresh();toast('تم تحديث قائمة الأصدقاء المقربين','success');},
+        async openChat(other){this.requireCloud(); state.social.selectedFriend=other;state.ui.view='friends';await this.loadMessages();render();},
+        async loadMessages(){const me=this.uid(),other=state.social.selectedFriend;if(!me||!other)return; socialUnsubs.forEach(u=>{try{u()}catch{}});socialUnsubs=[];const cid=this.chatId(me,other);try{const snap=await fb.db.collection('chats').doc(cid).collection('messages').orderBy('createdAt','asc').limit(100).get();state.social.messages=snap.docs.map(d=>({id:d.id,...d.data()}));saveState(false);}catch(e){state.social.messages=[];console.warn('Chat history unavailable',e);}socialUnsubs.push(fb.db.collection('chats').doc(cid).collection('messages').orderBy('createdAt','asc').limit(100).onSnapshot(snap=>{state.social.messages=snap.docs.map(d=>({id:d.id,...d.data()}));if(state.ui.view==='friends'&&state.social.selectedFriend===other){const box=$('#chatMessages');if(box){box.innerHTML=renderChatMessages();box.scrollTop=box.scrollHeight;}}}));},
+        async sendMessage(textValue){this.requireCloud();const me=this.uid(),other=state.social.selectedFriend,body=String(textValue||'').trim();if(!other||!body)return;if(body.length>2000)throw new Error('الرسالة طويلة جدًا');const cid=this.chatId(me,other);await fb.db.collection('chats').doc(cid).collection('messages').add({from:me,to:other,text:body,createdAt:iso(),senderName:state.profile.name||'طالب'});},
+        async sendTeamMessage(textValue){this.requireCloud();const team=teamById(state.activeTeamId),body=String(textValue||'').trim();if(!team||!team.shared||!team.memberIds.includes(this.uid()))throw new Error('اختر فريقًا مشتركًا أنت عضو فيه');if(!body)return;if(body.length>2000)throw new Error('الرسالة طويلة جدًا');await fb.db.collection('teams').doc(team.id).collection('messages').add({from:this.uid(),text:body,senderName:state.profile.name||'طالب',createdAt:iso()});},
+        async loadTeamMessages(){const team=teamById(state.activeTeamId);if(!team||!team.shared||!this.uid())return;socialUnsubs.forEach(u=>{try{u()}catch{}});socialUnsubs=[];const ref=fb.db.collection('teams').doc(team.id).collection('messages').orderBy('createdAt','asc').limit(100);try{const snap=await ref.get();state.social.teamMessages=snap.docs.map(d=>({id:d.id,...d.data()}));}catch{state.social.teamMessages=[];}socialUnsubs.push(ref.onSnapshot(snap=>{state.social.teamMessages=snap.docs.map(d=>({id:d.id,...d.data()}));if(state.ui.view==='friends'){const box=$('#teamChatMessages');if(box){box.innerHTML=renderTeamMessages();box.scrollTop=box.scrollHeight;}}}));},
+        async setPresence(online){const me=this.uid();if(!me||!fb.ready)return;try{await fb.db.collection('publicProfiles').doc(me).set({online:!!online,lastSeen:iso()},{merge:true});await fb.db.collection('presence').doc(me).set({uid:me,online:!!online,lastSeen:iso()},{merge:true});}catch(e){console.warn('Presence update blocked by Firestore rules',e);}},
+        startPresence(){if(presenceTimer)clearInterval(presenceTimer);if(!this.uid())return;this.setPresence(true);presenceTimer=setInterval(()=>this.setPresence(document.visibilityState==='visible'&&navigator.onLine),60000);window.addEventListener('online',()=>this.setPresence(true));window.addEventListener('offline',()=>this.setPresence(false));document.addEventListener('visibilitychange',()=>this.setPresence(document.visibilityState==='visible'&&navigator.onLine));}
+      };
+      function renderChatMessages(){const me=Social.uid();return (state.social.messages||[]).map(m=>`<div class="list-item" style="justify-content:${m.from===me?'flex-start':'flex-end'}"><div class="card" style="max-width:85%;padding:10px 14px"><strong class="small">${esc(m.senderName||'طالب')}</strong><div style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(m.text||'')}</div><div class="muted small">${esc(m.createdAt?fmtDateTime(m.createdAt):'')}</div></div></div>`).join('')||emptyHtml('ابدأ المحادثة برسالة لطيفة 👋');}
+      function renderTeamMessages(){const me=Social.uid();return (state.social.teamMessages||[]).map(m=>`<div class="list-item"><div class="card" style="max-width:95%;padding:10px 14px"><strong class="small">${esc(m.senderName||'طالب')}${m.from===me?' · أنت':''}</strong><div style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(m.text||'')}</div><div class="muted small">${esc(m.createdAt?fmtDateTime(m.createdAt):'')}</div></div></div>`).join('')||emptyHtml('لا توجد رسائل في الفريق بعد');}
+      function renderFriends(){const me=Social.uid();if(!me)return `<div class="card"><h2>الأصدقاء والشات</h2><p class="muted">سجّل الدخول بحسابك لتفعيل الأصدقاء والشات والأونلاين.</p><button class="btn primary" data-action="nav" data-view="settings">تسجيل الدخول</button></div>`;
+        const selected=state.social.selectedFriend, friend=(state.social.friends||[]).find(x=>x.uid===selected), results=state.social.searchResults||[];
+        return `<div class="grid cols-2"><div class="card"><div class="row between"><h2 class="title">الأصدقاء</h2><button class="btn sm" data-action="social-refresh">تحديث</button></div><form id="friendSearchForm" class="row"><input class="input" name="query" minlength="2" placeholder="ابحث باسم الطالب أو UID" value="${esc(state.social.query||'')}" required><button class="btn primary">بحث</button></form><div class="list" style="margin-top:10px">${results.map(x=>`<div class="list-item"><div class="list-main"><strong>${esc(x.name)}</strong><div class="muted small">UID: ${esc(x.uid)} · مستوى ${x.level} · ${x.online?'🟢 متصل':'⚪ غير متصل'}</div></div><button class="btn sm primary" data-action="friend-add" data-id="${esc(x.uid)}">إضافة</button></div>`).join('')}</div><h3>طلبات الصداقة</h3><div class="list">${(state.social.requests||[]).map(r=>`<div class="list-item"><div class="list-main"><strong>${esc(r.fromName||r.from||r.to)}</strong><div class="muted small">${r.incoming?'طلب وارد':'طلب مرسل'}</div></div>${r.incoming?`<button class="btn sm primary" data-action="friend-accept" data-id="${esc(r.id)}">قبول</button><button class="btn sm danger" data-action="friend-decline" data-id="${esc(r.id)}">رفض</button>`:''}</div>`).join('')||emptyHtml('لا توجد طلبات')}</div><h3>قائمة أصدقائك</h3><div class="list">${(state.social.friends||[]).map(f=>`<div class="list-item"><div class="list-main"><strong>${esc(f.name)}</strong><div class="muted small">${f.online?'🟢 متصل الآن':'⚪ غير متصل'} · مستوى ${f.level}${f.close?' · ⭐ صديق مقرب':''}</div></div><button class="btn sm primary" data-action="open-chat" data-id="${esc(f.uid)}">شات</button><button class="btn sm" data-action="toggle-close-friend" data-id="${esc(f.uid)}">${f.close?'إلغاء التقريب':'صديق مقرب ⭐'}</button></div>`).join('')||emptyHtml('أضف أصدقاء لبدء التواصل')}</div></div>
+        <div class="card"><h2 class="title">${friend?'الشات مع '+esc(friend.name):'الشات الخاص'}</h2><div id="chatMessages" class="list" style="height:320px;overflow:auto">${selected?renderChatMessages():emptyHtml('اختر صديقًا من القائمة لفتح المحادثة')}</div>${selected?`<form id="chatForm" class="row" style="margin-top:10px"><input class="input" name="message" maxlength="2000" placeholder="اكتب رسالتك…" required><button class="btn primary">إرسال</button></form>`:''}<hr><h3>شات الفريق</h3><div class="muted small">الفريق النشط: ${esc(teamById(state.activeTeamId)?.name||'لا يوجد')}</div><div id="teamChatMessages" class="list" style="height:220px;overflow:auto">${renderTeamMessages()}</div>${teamById(state.activeTeamId)?.shared?`<form id="teamChatForm" class="row" style="margin-top:10px"><input class="input" name="message" maxlength="2000" placeholder="رسالة لكل أعضاء الفريق…" required><button class="btn primary">إرسال للفريق</button></form>`:`<p class="muted small">أنشئ أو انضم لفريق مشترك لاستخدام شات الفريق.</p>`}</div></div>`;
+      }
+
       const Challenges={
         async create(d){ const c=normalizeChallenge({...d,ownerId:state.auth.uid||'local'}); if(fb.ready && state.auth.provider==='firebase' && state.auth.uid){ c.source='cloud'; const payload={...c,createdAt:iso()}; delete payload.id; const ref=await fb.db.collection('challenges').add(payload); c.id=ref.id; state.challenges.cloud.unshift(c); } else { c.source='local'; state.challenges.local.unshift(c); } saveState(); toast(t('savedMsg'),'success'); return c; },
         async fetchCloud(){ if(!fb.ready || state.auth.provider!=='firebase')return []; try{ const snap=await fb.db.collection('challenges').orderBy('endsAt','asc').limit(50).get(); state.challenges.cloud=snap.docs.map(d=>normalizeChallenge({...d.data(),id:d.id})).filter(c=>c.status==='active'&&new Date(c.endsAt)>=new Date()); saveState(false); return state.challenges.cloud; }catch{return[];} },
@@ -675,7 +814,7 @@
       function confirmModal({title='',message='',confirmText='',danger=false}={}){ return new Promise(res=>{ const m=openModal({title,size:'sm',dismissible:false,body:`<p>${esc(message)}</p>`,footer:`<button class="btn ${danger?'danger':'primary'}" id="ok">${esc(confirmText||t('confirm'))}</button><button class="btn" id="cx">${esc(t('cancel'))}</button>`}); m.el.querySelector('#ok').onclick=()=>{m.close();res(true);}; m.el.querySelector('#cx').onclick=()=>{m.close();res(false);}; }); }
       function promptSafe(label,def=''){ return new Promise(res=>{ const m=openModal({title:label,size:'sm',dismissible:false,body:`<label class="field"><span>${esc(label)}</span><input class="input" id="pi" value="${esc(def)}"></label>`,footer:`<button class="btn primary" id="ok">${esc(t('save'))}</button><button class="btn" id="cx">${esc(t('cancel'))}</button>`}); m.el.querySelector('#ok').onclick=()=>{const v=m.el.querySelector('#pi').value.trim(); m.close(); res(v||null);}; m.el.querySelector('#cx').onclick=()=>{m.close();res(null);}; }); }
       function applySettings(){ const lang=state.settings.lang; document.documentElement.lang=lang; document.documentElement.dir=lang==='ar'?'rtl':'ltr'; const dark=state.settings.themeMode==='dark'||(state.settings.themeMode==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches); document.documentElement.dataset.theme=dark?'dark':'light'; const preset=getPreset(state.settings.themePreset); document.documentElement.style.setProperty('--accent',state.settings.accent||preset.accent); const meta=document.querySelector('meta[name=theme-color]'); if(meta) meta.content=state.settings.accent||preset.accent; }
-      function navItems(){ const items=[['home','home'],['tasks','tasks'],['groups','users'],['teams','trophy'],['leaderboard','medal'],['challenges','fire'],['focus','focus'],['settings','settings']]; if(state.developer.unlocked) items.push(['developer','crown']); return items; }
+      function navItems(){ const items=[['home','home'],['tasks','tasks'],['groups','users'],['teams','trophy'],['friends','users'],['leaderboard','medal']]; if(state.developer.unlocked) items.push(['challenges','fire']); items.push(['focus','focus'],['settings','settings']); if(state.developer.unlocked) items.push(['developer','crown']); return items; }
       function bottomItems(){ return ['home','tasks','focus','leaderboard','settings']; }
       function render(){ applySettings(); $('#app').innerHTML=activeProfile?renderShell():renderLogin(); updateBell(); if(state.activeFocus){ensureTimer();updateFocusUI();} }
       function avatarHtml(size=38){ const frame=state.game.frames.equipped||'none'; const photo=state.profile.photo||state.auth.photoURL; const name=state.profile.name||state.auth.displayName||'U'; return `<span class="avatar-wrap">${photo?`<img class="avatar frame-${esc(frame)}" style="width:${size}px;height:${size}px" src="${esc(photo)}" alt="">`:`<span class="avatar frame-${esc(frame)}" style="width:${size}px;height:${size}px;background:${esc(state.profile.avatarColor)}">${esc((name||'م').slice(0,1).toUpperCase())}</span>`}</span>`; }
@@ -708,8 +847,9 @@
         if(v==='tasks') return renderTasks();
         if(v==='groups') return renderGroups();
         if(v==='teams') return renderTeams();
+        if(v==='friends') return renderFriends();
         if(v==='leaderboard') return renderLeaderboard();
-        if(v==='challenges') return renderChallenges();
+        if(v==='challenges') return state.developer.unlocked ? renderChallenges() : renderHome();
         if(v==='focus') return renderFocus();
         if(v==='settings') return renderSettings();
         if(v==='developer') return renderDeveloper();
@@ -728,7 +868,7 @@
         const pinned=(state.announcements||[]).filter(a=>a.active!==false&&a.pinned).sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
         return `${pinned.length?`<div class="card" style="margin-bottom:12px;border:1px solid var(--accent);background:linear-gradient(135deg,var(--surface),var(--surface2))"><div class="row between"><h2 class="title">📌 ${esc(pinned[0].title||t('pinned'))}</h2><span class="badge done">${esc(t('pinned'))}</span></div><p style="white-space:pre-wrap;margin:8px 0 0">${esc(pinned[0].body||'')}</p></div>`:''}<div class="grid stats">${statCard(t('today'),todays.length,`${overdue} ${t('overdue')}`,'tasks')}${statCard(t('xp'),state.game.xp,`${t('level')} ${state.game.level}`,'star')}${statCard(t('streak'),state.game.streak,`${t('bestStreak')}: ${state.game.bestStreak}`,'fire')}${statCard(t('focus'),fmtDuration(focusMinutesOn(new Date())),t('todaySessions'),'focus')}</div>
         <div class="card" style="margin-top:12px"><h2 class="title">${esc(t('quickAdd'))}</h2><form id="quickAddForm" class="row" style="margin-top:10px"><input class="input" name="text" placeholder="${esc(t('quickAdd'))}" required><button class="btn primary" type="submit">${icon('plus',18)} ${esc(t('add'))}</button></form></div>
-        <div class="grid cols-2" style="margin-top:12px"><div class="card"><div class="row between"><h2 class="title">${esc(t('today'))}</h2><button class="btn sm" data-action="nav" data-view="tasks">${esc(t('all'))}</button></div><div class="list">${todays.length?todays.slice(0,5).map(taskRow).join(''):emptyHtml(t('noTasks'))}</div></div><div class="card"><h2 class="title">${esc(t('nearestChallenge'))}</h2>${nearest?`<div style="font-weight:900">${esc(nearest.title)}</div><div class="muted small">${esc(fmtDateTime(nearest.endsAt))} • +${nearest.rewardXp} XP</div>`:emptyHtml(t('noChallenges'))}<div class="kv" style="margin-top:10px"><span>${esc(t('activeTeam'))}</span><strong>${esc(state.activeTeamId?teamById(state.activeTeamId)?.name||'—':t('noActiveTeam'))}</strong></div><div class="row" style="margin-top:10px"><button class="btn primary sm" data-action="nav" data-view="focus">${esc(t('startFocus'))}</button><button class="btn sm" data-action="nav" data-view="leaderboard">${esc(t('leaderboard'))}</button></div></div></div>`;
+        <div class="grid cols-2" style="margin-top:12px"><div class="card"><div class="row between"><h2 class="title">${esc(t('today'))}</h2><button class="btn sm" data-action="nav" data-view="tasks">${esc(t('all'))}</button></div><div class="list">${todays.length?todays.slice(0,5).map(taskRow).join(''):emptyHtml(t('noTasks'))}</div></div><div class="card"><h2 class="title">${esc(t('activeTeam'))}</h2><div class="kv"><span>${esc(t('activeTeam'))}</span><strong>${esc(state.activeTeamId?teamById(state.activeTeamId)?.name||'—':t('noActiveTeam'))}</strong></div><div class="kv"><span>${esc(t('tasksCompleted'))}</span><strong>${state.tasks.filter(x=>x.status==='done').length}</strong></div><div class="kv"><span>${esc(t('xp'))}</span><strong>${Math.max(0,Math.round(state.game.xp||0))} XP</strong></div><div class="row" style="margin-top:10px"><button class="btn primary sm" data-action="nav" data-view="focus">${esc(t('startFocus'))}</button><button class="btn sm" data-action="nav" data-view="leaderboard">${esc(t('leaderboard'))}</button></div></div></div>`;
       }
 
       function filteredTasks(){
@@ -757,8 +897,12 @@
         if(state.ui.taskView==='kanban') return `<div class="kanban">${STATUS.map(st=>`<div class="kanban-col" data-status="${st}"><div class="row between"><strong>${esc(t(st))}</strong><span class="badge">${list.filter(x=>x.status===st).length}</span></div>${list.filter(x=>x.status===st).map(x=>`<div class="kanban-card" draggable="true" data-id="${x.id}"><div class="list-title">${esc(x.title)}</div><div class="meta"><span class="badge ${x.priority}">${esc(t(x.priority))}</span></div></div>`).join('')||emptyHtml(t('noTasks'))}</div>`).join('')}</div>`;
         return `<div class="list">${list.length?list.map(taskRow).join(''):emptyHtml(t('noTasks'))}</div>`;
       }
+      function renderDailyQuests(){
+        const d=DailyQuests.data(), qs=DailyQuests.definitions();
+        return `<div class="card"><div class="row between"><div><h2 class="title">🎯 مهام اليوم</h2><p class="subtitle">تتجدد تلقائيًا كل يوم • كل مكافأة تُستلم مرة واحدة</p></div><span class="badge">${esc(d.date)}</span></div><div class="grid-cards">${qs.map(q=>{const pct=Math.min(100,Math.round(q.progress/q.goal*100)),claimed=!!d.claimed[q.id],done=q.progress>=q.goal;return `<div class="card entity-card"><div class="row between"><strong>${esc(q.title)}</strong><span class="badge">${q.xp} XP</span></div><p class="muted small">${esc(q.description)}</p><div style="height:7px;background:var(--border);border-radius:9px;overflow:hidden"><div style="height:100%;width:${pct}%;background:var(--accent)"></div></div><div class="row between" style="margin-top:8px"><span class="muted small">${Math.min(q.progress,q.goal)} / ${q.goal}</span><button class="btn sm ${done&&!claimed?'primary':''}" data-action="claim-daily-quest" data-id="${q.id}" ${!done||claimed?'disabled':''}>${claimed?'تم الاستلام':done?'استلام XP':'قيد التقدم'}</button></div></div>`}).join('')}</div></div>`;
+      }
       function renderTasks(){
-        return `<div class="card"><div class="toolbar"><input id="taskSearch" class="input" placeholder="${esc(t('search'))}" value="${esc(state.ui.taskSearch)}"><select id="taskSort" class="input" style="max-width:160px"><option value="due" ${state.ui.taskSort==='due'?'selected':''}>${esc(t('sortDue'))}</option><option value="priority" ${state.ui.taskSort==='priority'?'selected':''}>${esc(t('sortPriority'))}</option><option value="created" ${state.ui.taskSort==='created'?'selected':''}>${esc(t('sortCreated'))}</option><option value="title" ${state.ui.taskSort==='title'?'selected':''}>${esc(t('sortTitle'))}</option></select><select class="input" style="max-width:160px" data-action="group-filter"><option value="all">${esc(t('all'))} ${esc(t('groups'))}</option>${state.groups.map(g=>`<option value="${g.id}" ${state.ui.groupFilter===g.id?'selected':''}>${esc(g.name)}</option>`).join('')}</select><select class="input" style="max-width:160px" data-action="team-filter"><option value="all">${esc(t('all'))} ${esc(t('teams'))}</option>${state.teams.map(g=>`<option value="${g.id}" ${state.ui.teamFilter===g.id?'selected':''}>${esc(g.name)}</option>`).join('')}</select><button class="btn" data-action="toggle-view">${esc(state.ui.taskView==='list'?t('kanban'):t('list'))}</button><button class="btn primary" data-action="new-task">${icon('plus',18)} ${esc(t('addTask'))}</button></div><div class="row" style="margin-bottom:10px">${['today','upcoming','overdue','done','all'].map(f=>`<button class="chip ${state.ui.taskFilter===f?'active':''}" data-action="task-filter" data-filter="${f}">${esc(t(f))}</button>`).join('')}</div><div id="tasksContent">${renderTasksContent()}</div></div>`;
+        return `${renderDailyQuests()}<div class="card"><div class="toolbar"><input id="taskSearch" class="input" placeholder="${esc(t('search'))}" value="${esc(state.ui.taskSearch)}"><select id="taskSort" class="input" style="max-width:160px"><option value="due" ${state.ui.taskSort==='due'?'selected':''}>${esc(t('sortDue'))}</option><option value="priority" ${state.ui.taskSort==='priority'?'selected':''}>${esc(t('sortPriority'))}</option><option value="created" ${state.ui.taskSort==='created'?'selected':''}>${esc(t('sortCreated'))}</option><option value="title" ${state.ui.taskSort==='title'?'selected':''}>${esc(t('sortTitle'))}</option></select><select class="input" style="max-width:160px" data-action="group-filter"><option value="all">${esc(t('all'))} ${esc(t('groups'))}</option>${state.groups.map(g=>`<option value="${g.id}" ${state.ui.groupFilter===g.id?'selected':''}>${esc(g.name)}</option>`).join('')}</select><select class="input" style="max-width:160px" data-action="team-filter"><option value="all">${esc(t('all'))} ${esc(t('teams'))}</option>${state.teams.map(g=>`<option value="${g.id}" ${state.ui.teamFilter===g.id?'selected':''}>${esc(g.name)}</option>`).join('')}</select><button class="btn" data-action="toggle-view">${esc(state.ui.taskView==='list'?t('kanban'):t('list'))}</button><button class="btn primary" data-action="new-task">${icon('plus',18)} ${esc(t('addTask'))}</button></div><div class="row" style="margin-bottom:10px">${['today','upcoming','overdue','done','all'].map(f=>`<button class="chip ${state.ui.taskFilter===f?'active':''}" data-action="task-filter" data-filter="${f}">${esc(t(f))}</button>`).join('')}</div><div id="tasksContent">${renderTasksContent()}</div></div>`;
       }
 
       function renderGroups(){
@@ -798,10 +942,10 @@
       function renderSettings(){
         const s=state.settings;
         return `<div class="grid cols-2">
-          <div class="card"><h2 class="title">${esc(t('profile'))}</h2><form id="profileForm" class="form-grid"><div class="full row"><div>${avatarHtml(72)}</div><div class="grid" style="flex:1"><label class="field"><span>${esc(t('displayName'))}</span><input class="input" name="name" value="${esc(state.profile.name)}" required></label><label class="field"><span>${esc(t('school'))}</span><input class="input" name="school" value="${esc(state.profile.school)}"></label></div></div><label class="field full"><span>${esc(t('photo'))}</span><input class="input" type="file" id="photoFile" accept="image/*"></label><label class="field"><span>${esc(t('accent'))}</span><input class="input" type="color" name="accent" value="${esc(s.accent)}"></label><div class="full row"><button class="btn primary" type="submit">${esc(t('save'))}</button><button type="button" class="btn" data-action="remove-photo">${esc(t('removePhoto'))}</button>${state.auth.provider==='firebase'?`<button type="button" class="btn danger" data-action="logout">${icon('logout',16)} ${esc(t('logout'))}</button>`:`<button type="button" class="btn" data-action="google-login">${GOOGLE_ICON} ${esc(t('google'))}</button>`}</div></form></div>
+          <div class="card"><h2 class="title">${esc(t('profile'))}</h2><div class="kv"><span>${state.settings.lang==='ar'?'معرّف الحساب (Profile ID)':'Account ID (Profile ID)'}</span><strong dir="ltr" style="overflow-wrap:anywhere">${esc(state.auth.provider==='firebase'&&state.auth.uid&&state.auth.uid!=='guest'?state.auth.uid:(activeProfile?.id||'LOCAL-'+String(activeProfile?.id||'guest').slice(0,12)))}</strong></div><p class="muted small">${state.settings.lang==='ar'?'احتفظ بهذا المعرّف لاستخدامه في إدارة الحساب من لوحة المطور.':'Keep this ID for account management in the developer console.'}</p><form id="profileForm" class="form-grid"><div class="full row"><div>${avatarHtml(72)}</div><div class="grid" style="flex:1"><label class="field"><span>${esc(t('displayName'))}</span><input class="input" name="name" value="${esc(state.profile.name)}" required></label><label class="field"><span>${esc(t('school'))}</span><input class="input" name="school" value="${esc(state.profile.school)}"></label></div></div><label class="field full"><span>${esc(t('photo'))}</span><input class="input" type="file" id="photoFile" accept="image/*"></label><label class="field"><span>${esc(t('accent'))}</span><input class="input" type="color" name="accent" value="${esc(s.accent)}"></label><div class="full row"><button class="btn primary" type="submit">${esc(t('save'))}</button><button type="button" class="btn" data-action="remove-photo">${esc(t('removePhoto'))}</button>${state.auth.provider==='firebase'?`<button type="button" class="btn danger" data-action="logout">${icon('logout',16)} ${esc(t('logout'))}</button>`:`<button type="button" class="btn" data-action="google-login">${GOOGLE_ICON} ${esc(t('google'))}</button>`}</div></form></div>
           <div class="card"><h2 class="title">${esc(t('settings'))}</h2><form id="settingsForm" class="form-grid"><label class="field"><span>${esc(t('language'))}</span><select class="input" name="lang"><option value="ar" ${s.lang==='ar'?'selected':''}>${esc(t('arabic'))}</option><option value="en" ${s.lang==='en'?'selected':''}>${esc(t('english'))}</option></select></label><label class="field"><span>${esc(t('theme'))}</span><select class="input" name="themeMode"><option value="auto" ${s.themeMode==='auto'?'selected':''}>${esc(t('auto'))}</option><option value="light" ${s.themeMode==='light'?'selected':''}>${esc(t('light'))}</option><option value="dark" ${s.themeMode==='dark'?'selected':''}>${esc(t('dark'))}</option></select></label><label class="field"><span>${esc(t('preset'))}</span><select class="input" name="themePreset">${THEME_PRESETS.map(p=>`<option value="${p.id}" ${s.themePreset===p.id?'selected':''}>${esc(state.settings.lang==='ar'?p.ar:p.en)}</option>`).join('')}</select></label><label class="field"><span>${esc(t('workMin'))}</span><input class="input" type="number" name="work" min="1" max="240" value="${s.pomodoro.work}"></label><label class="field"><span>${esc(t('shortBreak'))}</span><input class="input" type="number" name="short" min="1" max="120" value="${s.pomodoro.short}"></label><label class="field"><span>${esc(t('notifications'))}</span><select class="input" name="notifyLead"><option value="10" ${s.notifyLead===10?'selected':''}>10</option><option value="60" ${s.notifyLead===60?'selected':''}>60</option><option value="1440" ${s.notifyLead===1440?'selected':''}>1440</option></select></label><label class="checkbox-line"><input type="checkbox" name="sound" ${s.sound?'checked':''}><span>${state.settings.lang==='ar'?'الصوت':'Sound'}</span></label><label class="checkbox-line"><input type="checkbox" name="vibration" ${s.vibration?'checked':''}><span>${state.settings.lang==='ar'?'اهتزاز':'Vibration'}</span></label><div class="full row"><button class="btn primary" type="submit">${esc(t('save'))}</button><button type="button" class="btn" data-action="request-notifications">${esc(t('enableNotifications'))}</button></div></form></div>
           <div class="card"><h2 class="title">${esc(t('subjects'))}</h2><div class="list">${state.subjects.map(x=>`<div class="list-item"><span class="dot" style="background:${esc(x.color)}"></span><div class="list-main"><div class="list-title">${esc(x.name)}</div></div><div class="row"><button class="icon-btn" data-action="edit-subject" data-id="${x.id}">${icon('edit',16)}</button><button class="icon-btn" data-action="delete-subject" data-id="${x.id}">${icon('trash',16)}</button></div></div>`).join('')||emptyHtml(t('noSubjects'))}</div><button class="btn primary" data-action="new-subject" style="margin-top:10px">${icon('plus',16)} ${esc(t('addSubject'))}</button></div>
-          <div class="card"><h2 class="title">${esc(t('contactDeveloper'))}</h2><form id="inquiryForm" class="auth-form"><label class="field"><span>${esc(t('title'))}</span><input class="input" name="subject" required maxlength="120"></label><label class="field"><span>${esc(t('message'))}</span><textarea class="input" name="message" required maxlength="1000"></textarea></label><button class="btn primary" type="submit">${esc(t('send'))}</button></form></div>
+          <div class="card"><h2 class="title">${esc(t('contactDeveloper'))} / الدعم والمراجعة</h2><p class="muted small">يمكنك إرسال طلب مراجعة أو الإبلاغ عن مشكلة. احتفظ برقم الطلب الذي يظهر بعد الإرسال. إذا كان الحساب محظورًا ولا يمكنك تسجيل الدخول، فقد تحتاج إلى قناة دعم مستقلة خارج التطبيق.</p><form id="inquiryForm" class="auth-form"><label class="field"><span>نوع الطلب</span><select class="input" name="category"><option value="general">استفسار عام</option><option value="bug">بلاغ عن خطأ أو فقدان تقدم</option><option value="appeal">طلب مراجعة حظر الحساب</option><option value="xp">مراجعة نقاط XP أو إنجاز</option><option value="privacy">الخصوصية والبيانات</option></select></label><label class="field"><span>${esc(t('title'))}</span><input class="input" name="subject" required maxlength="120"></label><label class="field"><span>${esc(t('message'))}</span><textarea class="input" name="message" required maxlength="1500"></textarea></label><button class="btn primary" type="submit">${esc(t('send'))}</button></form><div class="muted small">لا ترسل كلمة المرور أو رموز التحقق في طلب الدعم.</div></div>
           <div class="card"><h2 class="title">${esc(t('about'))}</h2><p>${state.settings.lang==='ar'?'منجز Ultra تطبيق الطالب الحديث. تطوير YS.':'Munjiz Ultra modern student app. Developed by YS.'}</p><div class="kv"><span>${esc(t('version'))}</span><strong>${esc(APP.version)}</strong></div><div class="kv"><span>${esc(t('copyright'))}</span><strong class="ys-signature">YS</strong></div><div class="row" style="margin-top:10px"><button class="btn" data-action="export-json">${icon('download',16)} ${esc(t('exportJson'))}</button><button class="btn" data-action="import-json">${icon('upload',16)} ${esc(t('importJson'))}</button><button class="btn" data-action="export-csv">${icon('download',16)} ${esc(t('exportCsv'))}</button></div><button class="btn danger" data-action="delete-all" style="margin-top:10px">${icon('trash',16)} ${esc(t('deleteAll'))}</button></div>
         </div>`;
       }
@@ -819,8 +963,11 @@
           <div class="card"><h3 class="title">${esc(t('grantFrame'))}</h3><form id="grantFrameForm" class="auth-form"><label class="field"><span>${esc(t('targetUid'))}</span><input class="input" name="uid" required dir="ltr" maxlength="128"></label><label class="field"><span>${esc(t('frames'))}</span><select class="input" name="frameId">${FRAME_DEFS.map(f=>`<option value="${esc(f.id)}">${esc(frameName(f.id))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('grantFrame'))}</button></form></div>
           <div class="card"><h3 class="title">${esc(t('createGlobalChallenge'))}</h3><form id="globalChallengeForm" class="auth-form"><label class="field"><span>${esc(t('challengeTitle'))}</span><input class="input" name="title" required maxlength="160"></label><label class="field"><span>${esc(t('challengeDesc'))}</span><textarea class="input" name="description" maxlength="1000"></textarea></label><label class="field"><span>${esc(t('challengeType'))}</span><select class="input" name="type"><option value="race">${esc(t('race'))}</option><option value="focus">${esc(t('focusChallenge'))}</option><option value="streak">${esc(t('streakChallenge'))}</option><option value="team">${esc(t('teamChallenge'))}</option></select></label><label class="field"><span>${esc(t('goal'))}</span><input class="input" type="number" name="goal" min="1" value="1" required></label><label class="field"><span>${esc(t('rewardXp'))}</span><input class="input" type="number" name="rewardXp" min="0" max="100000" value="100" required></label><label class="field"><span>${esc(t('endsAt'))}</span><input class="input" type="datetime-local" name="endsAt" value="${esc(toLocalInput(addDays(new Date(),3)))}" required></label><button class="btn primary" type="submit">${esc(t('createGlobalChallenge'))}</button></form></div>
           <div class="card"><h3 class="title">${esc(t('manageAnnouncements'))}</h3><div class="list">${announcements.map(a=>`<div class="list-item"><div class="list-main"><div class="list-title">${a.pinned?'📌 ':''}${esc(a.title||'—')}</div><p class="muted small" style="white-space:pre-wrap">${esc(a.body||'')}</p><div class="meta"><span>${esc(fmtDateTime(a.createdAt))}</span><span class="badge ${a.active===false?'':'done'}">${a.active===false?esc(t('deactivate')):esc(a.pinned?t('pinned'):t('active'))}</span></div></div><div class="row"><button class="btn sm" data-action="toggle-pin-announcement" data-id="${esc(a.id)}">${esc(a.pinned?t('unpin'):t('pinAnnouncement'))}</button><button class="btn sm danger" data-action="hide-announcement" data-id="${esc(a.id)}">${esc(t('deactivate'))}</button></div></div>`).join('')||emptyHtml(t('noData'))}</div></div>
+          <div class="card full"><h3 class="title">🛡️ إدارة الحسابات والصلاحيات</h3><form id="accountAdminForm" class="form-grid"><label class="field full"><span>UID / Account ID</span><input class="input" name="uid" required dir="ltr" maxlength="128" placeholder="Firebase Authentication UID"></label><label class="field full"><span>سبب الإجراء (للحظر)</span><input class="input" name="reason" maxlength="500"></label><div class="row full"><button class="btn danger" type="button" data-action="admin-ban">حظر الحساب</button><button class="btn" type="button" data-action="admin-unban">رفع الحظر</button><button class="btn primary" type="button" data-action="admin-mod-on">منح مشرف</button><button class="btn" type="button" data-action="admin-mod-off">سحب مشرف</button></div></form><p class="muted small">الإجراءات تحتاج صلاحيات Firestore متوافقة. لا تضع UID أو كلمات مرور في سجلات عامة.</p><div id="bannedList" class="list"><button class="btn sm" data-action="load-banned">عرض قائمة المحظورين</button></div></div>
+          <div class="card full"><h3 class="title">🏆 كتالوج الإنجازات والأوسمة والألقاب والجوائز</h3><form id="catalogForm" class="form-grid"><label class="field"><span>النوع</span><select class="input" name="type"><option value="achievements">إنجاز</option><option value="customBadges">وسام</option><option value="customFrames">إطار</option><option value="customTitles">لقب</option><option value="awards">جائزة / كأس</option></select></label><label class="field"><span>الاسم</span><input class="input" name="title" required maxlength="100"></label><label class="field"><span>XP</span><input class="input" name="xp" type="number" min="0" max="100000" value="0"></label><label class="field"><span>شرط/قاعدة الاستحقاق</span><input class="input" name="condition" maxlength="200" placeholder="مثال: tasksCompleted>=10 أو manual"></label><label class="field full"><span>الوصف</span><textarea class="input" name="description" maxlength="500"></textarea></label><button class="btn primary full" type="submit">إضافة إلى الكتالوج</button></form><p class="muted small">هذه العناصر تُحفظ في Firestore ككتالوج ديناميكي؛ تطبيق شروط الإنجاز آليًا على جميع الحسابات يحتاج Cloud Function موثوقة، ولا يُعتبر نص الشرط وحده محركًا للتنفيذ.</p></div>
+          <div class="card full"><h3 class="title">⚡ مضاعفة النقاط وهوية التطبيق</h3><form id="doubleXpForm" class="form-grid"><label class="field"><span>بداية المضاعفة (اختياري)</span><input class="input" name="startsAt" type="datetime-local"></label><label class="field"><span>نهاية المضاعفة</span><input class="input" name="endsAt" type="datetime-local" required></label><div class="row full"><button class="btn primary" type="submit">تفعيل Double XP</button><button class="btn" type="button" data-action="double-xp-off">إيقاف المضاعفة</button></div></form><form id="brandingForm" class="form-grid" style="margin-top:12px"><label class="field"><span>اسم التطبيق</span><input class="input" name="name" maxlength="60" value="منجز Ultra" required></label><label class="field"><span>رابط شعار HTTPS (اختياري)</span><input class="input" name="logo" type="url" dir="ltr" placeholder="https://..."></label><button class="btn primary full" type="submit">حفظ الهوية للجميع</button></form></div>
           <div class="card"><h3 class="title">${esc(t('developerLogs'))}</h3><div class="dev-log">${state.developer.logs.length?state.developer.logs.map(l=>`<div class="kv"><span>${esc(l.action)}</span><strong>${esc(fmtDateTime(l.at))}</strong></div>`).join(''):emptyHtml(t('noData'))}</div></div>
-          <div class="card"><div class="row between"><h3 class="title">${esc(t('inquiry'))}</h3><button class="btn sm" data-action="refresh-inquiries">${esc(t('refresh'))}</button></div><div class="list">${(state.developer.inquiries||[]).map(q=>`<div class="list-item"><div class="list-main"><div class="list-title">${esc(q.subject||'—')}</div><div class="muted small">${esc(q.name||'')} • <span dir="ltr">${esc(q.uid||'')}</span></div><p>${esc(q.message||'')}</p>${q.developerReply?`<div class="badge done">${esc(q.developerReply)}</div>`:`<button class="btn sm primary" data-action="reply-inquiry" data-id="${esc(q.id)}">${esc(t('send'))}</button>`}</div></div>`).join('')||emptyHtml(t('noData'))}</div></div>
+          <div class="card"><div class="row between"><h3 class="title">${esc(t('inquiry'))}</h3><button class="btn sm" data-action="refresh-inquiries">${esc(t('refresh'))}</button></div><div class="list">${(state.developer.inquiries||[]).map(q=>`<div class="list-item"><div class="list-main"><div class="list-title">${esc(q.subject||'—')}</div><div class="meta"><span class="badge ${q.status==='answered'?'done':q.status==='closed'?'new':'inProgress'}">${esc(q.status||'open')}</span><span>${esc(q.category||'general')}</span><span dir="ltr">Ticket: ${esc(q.id)}</span></div><div class="muted small">${esc(q.name||'')} • <span dir="ltr">${esc(q.uid||'')}</span></div><p>${esc(q.message||'')}</p>${q.developerReply?`<div class="card" style="padding:10px"><strong>رد المختص</strong><p>${esc(q.developerReply)}</p></div>`:''}<div class="row">${q.status==='closed'?'':`<button class="btn sm primary" data-action="reply-inquiry" data-id="${esc(q.id)}">${esc(q.developerReply?'متابعة الطلب':t('send'))}</button>`}<button class="btn sm" data-action="toggle-inquiry-status" data-id="${esc(q.id)}" data-status="${q.status==='closed'?'open':'closed'}">${q.status==='closed'?'إعادة فتح':'إغلاق الطلب'}</button></div></div></div>`).join('')||emptyHtml(t('noData'))}</div></div>
         </div></div>`;
       }
 
@@ -872,7 +1019,7 @@
       function importJSON(){ const i=document.createElement('input'); i.type='file'; i.accept='application/json,.json'; i.onchange=async()=>{ const f=i.files?.[0]; if(!f)return; const r=new FileReader(); r.onload=async()=>{ try{ const obj=JSON.parse(r.result); if(!obj||!Array.isArray(obj.tasks)) throw 0; if(!await confirmModal({title:t('importJson'),message:t('deleteAllWarning'),danger:true})) return; state=normalizeState(obj); if(activeProfile) saveProfile(activeProfile.id,state); applySettings(); render(); toast(t('imported'),'success'); }catch{ toast(t('importFailed'),'error'); } }; r.readAsText(f); }; i.click(); }
       async function deleteAll(){ if(!await confirmModal({title:t('deleteAll'),message:t('deleteAllWarning'),danger:true})) return; const word=state.settings.lang==='ar'?'حذف':'delete'; const m=openModal({title:t('doubleConfirm'),size:'sm',dismissible:false,body:`<p>${esc(t('deleteAllWarning'))}</p><label class="field"><span>${esc(word)}</span><input class="input" id="kw"></label>`,footer:`<button class="btn danger" id="ok">${esc(t('confirm'))}</button><button class="btn" id="cx">${esc(t('cancel'))}</button>`}); m.el.querySelector('#ok').onclick=()=>{ if(m.el.querySelector('#kw').value.trim().toLowerCase()!==word){toast(t('invalidDate'),'error');return;} if(activeProfile) localStorage.removeItem(profileKey(activeProfile.id)); const list=getProfiles().filter(p=>p.id!==activeProfile?.id); saveProfiles(list); localStorage.removeItem(LS.active); activeProfile=null; state=normalizeState({settings:state.settings}); window.__state=state; m.close(); render(); toast(t('deleted'),'success'); }; m.el.querySelector('#cx').onclick=()=>m.close(); }
       function handlePhotoFile(file){ if(!file||!file.type.startsWith('image/')) return; const img=new Image(); const url=URL.createObjectURL(file); img.onload=()=>{ const size=256; const c=document.createElement('canvas'); c.width=size; c.height=size; const ctx=c.getContext('2d'); const min=Math.min(img.width,img.height); ctx.drawImage(img,(img.width-min)/2,(img.height-min)/2,min,min,0,0,size,size); state.profile.photo=c.toDataURL('image/jpeg',0.82); URL.revokeObjectURL(url); if(activeProfile){ activeProfile.photo=state.profile.photo; const list=getProfiles(); const i=list.findIndex(p=>p.id===activeProfile.id); if(i>=0){list[i]=activeProfile; saveProfiles(list);} } saveState(); render(); toast(t('savedMsg'),'success'); }; img.src=url; }
-      async function sendInquiry(subject,message){ if(!fb.ready || state.auth.provider!=='firebase'){ toast(t('requiresFirebase'),'warn'); return; } try{ await fb.db.collection('inquiries').add({uid:state.auth.uid,name:state.profile.name||state.auth.displayName||'User',subject,message,createdAt:iso(),status:'open',developerReply:''}); toast(t('inquirySent'),'success'); }catch{ toast(t('requiresFirebase'),'error'); } }
+      async function sendInquiry(subject,message,category='general'){ if(!fb.ready || state.auth.provider!=='firebase' || !state.auth.uid || state.auth.uid==='guest'){ toast(t('requiresFirebase'),'warn'); return false; } const cleanSubject=String(subject||'').trim().slice(0,120), cleanMessage=String(message||'').trim().slice(0,1500); const allowed=['general','bug','appeal','xp','privacy']; if(!cleanSubject||!cleanMessage){toast(t('requiredTitle'),'warn');return false;} if(!allowed.includes(category))category='general'; try{ const ref=await fb.db.collection('inquiries').add({uid:state.auth.uid,name:String(state.profile.name||state.auth.displayName||'User').slice(0,100),subject:cleanSubject,message:cleanMessage,category,createdAt:iso(),status:'open',developerReply:'',updatedAt:iso()}); toast(`تم إرسال الطلب. رقم المتابعة: ${ref.id}`,'success'); return true; }catch(e){ console.warn('Support request failed',e); toast('تعذر إرسال الطلب. تحقق من الاتصال وصلاحيات Firestore.','error'); return false; } }
 
       /* =========================
          15) Events
@@ -894,7 +1041,7 @@
           case 'delete-profile': if(await confirmModal({title:t('deleteProfile'),message:t('deleteAllWarning'),danger:true})) deleteProfile(id); break;
           case 'toggle-sidebar': state.ui.sidebarOpen=!state.ui.sidebarOpen; render(); break;
           case 'close-sidebar': state.ui.sidebarOpen=false; render(); break;
-          case 'nav': state.ui.view=el.dataset.view; state.ui.sidebarOpen=false; saveState(false); render(); if(state.ui.view==='leaderboard') Leaderboard.fetch(state.ui.leaderboardTab||'global'); break;
+          case 'nav': state.ui.view=el.dataset.view; state.ui.sidebarOpen=false; saveState(false); render(); if(state.ui.view==='leaderboard') Leaderboard.fetch(state.ui.leaderboardTab||'global'); if(state.ui.view==='friends'&&Social.uid()){Social.refresh(); if(state.social.selectedFriend)Social.loadMessages(); if(state.activeTeamId)Social.loadTeamMessages();} break;
           case 'alerts': openAlertsModal(); break;
           case 'mark-alerts': getAlerts().forEach(x=>state.notifications.seen[alertKey(x)]=true); saveState(); updateBell(); modalStack.at(-1)?.close(); break;
           case 'open-task': openTaskModal(id); modalStack.at(-1)?.close(); break;
@@ -918,6 +1065,12 @@
           case 'edit-group': openGroupModal(id); break;
           case 'save-group': { const f=$('#groupForm'); const fd=new FormData(f); if(!String(fd.get('name')||'').trim()){toast(t('requiredTitle'),'error');break;} Groups.upsert({id:f.dataset.id||uid(),name:fd.get('name'),color:fd.get('color'),description:fd.get('description')}); modalStack.at(-1)?.close(); render(); toast(t('savedMsg'),'success'); break; }
           case 'delete-group': if(await confirmModal({title:t('delete'),message:t('delete'),danger:true})) Groups.remove(id); break;
+          case 'social-refresh': await Social.refresh(); if(state.social.selectedFriend) await Social.loadMessages(); if(state.activeTeamId) await Social.loadTeamMessages(); break;
+          case 'friend-add': try{await Social.sendRequest(id);}catch(err){toast(err.message||'تعذر إرسال الطلب','error');} break;
+          case 'friend-accept': try{await Social.accept(id);}catch(err){toast(err.message||'تعذر قبول الطلب','error');} break;
+          case 'friend-decline': try{await Social.decline(id);}catch(err){toast(err.message||'تعذر رفض الطلب','error');} break;
+          case 'open-chat': try{await Social.openChat(id);}catch(err){toast(err.message||'تعذر فتح الشات','error');} break;
+          case 'toggle-close-friend': try{await Social.toggleClose(id);}catch(err){toast(err.message||'تعذر تحديث الصديق المقرب','error');} break;
           case 'new-team': openTeamModal(); break;
           case 'save-team': { const fd=new FormData($('#teamForm')); if(!String(fd.get('name')||'').trim()){toast(t('requiredTitle'),'error');break;} await Teams.create({name:fd.get('name'),color:fd.get('color'),description:fd.get('description')}); modalStack.at(-1)?.close(); render(); break; }
           case 'join-team': openJoinTeamModal(); break;
@@ -927,13 +1080,14 @@
           case 'leave-team': if(await confirmModal({title:t('leaveTeam'),message:t('leaveTeam'),danger:true})) await Teams.leave(id); render(); break;
           case 'lb-tab': Leaderboard.fetch(el.dataset.tab); break;
           case 'lb-refresh': Leaderboard.fetch(state.ui.leaderboardTab||'global'); break;
+          case 'claim-daily-quest': DailyQuests.claim(id); break;
           case 'equip-frame': Gamification.equipFrame(el.dataset.id); break;
           case 'equip-title': Gamification.equipTitle(el.dataset.id); break;
-          case 'new-challenge': openChallengeModal(); break;
-          case 'save-challenge': { const fd=new FormData($('#challengeForm')); if(!String(fd.get('title')||'').trim()){toast(t('requiredTitle'),'error');break;} await Challenges.create({title:fd.get('title'),description:fd.get('description'),type:fd.get('type'),goal:num(fd.get('goal'),1),rewardXp:num(fd.get('rewardXp'),100),endsAt:parseDate(fd.get('endsAt'))?.toISOString()||new Date(Date.now()+3*DAY).toISOString(),teamId:state.activeTeamId||null}); modalStack.at(-1)?.close(); render(); break; }
-          case 'refresh-challenges': await Challenges.fetchCloud(); render(); break;
-          case 'join-challenge': await Challenges.join(id, el.dataset.source); render(); break;
-          case 'submit-challenge': await Challenges.submit(id, el.dataset.source); render(); break;
+          case 'new-challenge': if(!state.developer.unlocked){toast(t('noDeveloperAccess'),'error');break;} openChallengeModal(); break;
+          case 'save-challenge': { if(!state.developer.unlocked){toast(t('noDeveloperAccess'),'error');break;} const fd=new FormData($('#challengeForm')); if(!String(fd.get('title')||'').trim()){toast(t('requiredTitle'),'error');break;} await Challenges.create({title:fd.get('title'),description:fd.get('description'),type:fd.get('type'),goal:num(fd.get('goal'),1),rewardXp:num(fd.get('rewardXp'),100),endsAt:parseDate(fd.get('endsAt'))?.toISOString()||new Date(Date.now()+3*DAY).toISOString(),teamId:state.activeTeamId||null}); modalStack.at(-1)?.close(); render(); break; }
+          case 'refresh-challenges': if(!state.developer.unlocked){toast(t('noDeveloperAccess'),'error');break;} await Challenges.fetchCloud(); render(); break;
+          case 'join-challenge': if(!state.developer.unlocked){toast(t('noDeveloperAccess'),'error');break;} await Challenges.join(id, el.dataset.source); render(); break;
+          case 'submit-challenge': if(!state.developer.unlocked){toast(t('noDeveloperAccess'),'error');break;} await Challenges.submit(id, el.dataset.source); render(); break;
           case 'focus-preset': { const i=$('#focusForm [name=minutes]'); if(i)i.value=el.dataset.min; break; }
           case 'focus-pause': pauseFocus(); break;
           case 'focus-resume': resumeFocus(); break;
@@ -947,10 +1101,15 @@
           case 'import-json': importJSON(); break;
           case 'export-csv': exportCSV(); break;
           case 'delete-all': await deleteAll(); break;
+          case 'admin-ban': case 'admin-unban': case 'admin-mod-on': case 'admin-mod-off': { if(!state.developer.unlocked)break; const f=$('#accountAdminForm'); const fd=new FormData(f); const target=String(fd.get('uid')||'').trim(); try{ if(el.dataset.action==='admin-ban')await Developer.setBan(target,true,fd.get('reason')); else if(el.dataset.action==='admin-unban')await Developer.setBan(target,false); else if(el.dataset.action==='admin-mod-on')await Developer.setModerator(target,true); else await Developer.setModerator(target,false); }catch(err){toast(err.message||'تعذر تنفيذ الإجراء','error');} break; }
+          case 'load-banned': { if(!state.developer.unlocked)break; try{const rows=await Developer.loadBanned(); const box=$('#bannedList'); if(box)box.innerHTML=rows.length?rows.map(b=>`<div class="list-item"><div class="list-main"><strong dir="ltr">${esc(b.id)}</strong><div class="muted small">${esc(b.reason||'بدون سبب')} • ${esc(b.at||'')}</div></div><button class="btn sm" data-action="unban-listed" data-id="${esc(b.id)}">رفع الحظر</button></div>`).join(''):emptyHtml('لا توجد حسابات محظورة');}catch(err){toast(err.message||'تعذر تحميل القائمة','error');} break; }
+          case 'unban-listed': { if(!state.developer.unlocked)break; try{await Developer.setBan(id,false); const box=$('#bannedList'); if(box)box.querySelector(`[data-id="${CSS.escape(id)}"]`)?.closest('.list-item')?.remove();}catch(err){toast(err.message||'تعذر رفع الحظر','error');} break; }
+          case 'double-xp-off': { if(!state.developer.unlocked)break; try{await Developer.setFlag('doubleXp',false);}catch(err){toast(err.message||'تعذر الإيقاف','error');} break; }
           case 'dev-login': { const fd=new FormData($('#devLoginForm')); const ok=await loginWithEmail(fd.get('email'),fd.get('password'),true); if(ok){ const isDev=await Developer.check(); if(isDev){ modalStack.at(-1)?.close(); } else { await logout(); toast(t('noDeveloperAccess'),'error'); } } break; }
           case 'reply-inquiry': openReplyModal(id); break;
+          case 'toggle-inquiry-status': { if(!state.developer.unlocked)break; try{await Developer.setInquiryStatus(id,el.dataset.status==='closed'?'closed':'open'); render();}catch(err){toast(err.message||t('requiresFirebase'),'error');} break; }
           case 'refresh-inquiries': await Developer.loadInquiries(); render(); break;
-          case 'toggle-pin-announcement': { if(!state.developer.unlocked)break; const a=(state.announcements||[]).find(x=>x.id===id); if(!a)break; try{await Developer.setAnnouncement(id,{pinned:!a.pinned}); a.pinned=!a.pinned; render(); toast(t('savedMsg'),'success');}catch(err){toast(err.message||t('requiresFirebase'),'error');} break; }
+          case 'toggle-pin-announcement': { if(!state.developer.unlocked)break; const a=(state.announcements||[]).find(x=>x.id===id); if(!a)break; const next=!a.pinned; try{await Developer.setAnnouncement(id,{pinned:next,updatedAt:iso()}); a.pinned=next; a.updatedAt=iso(); saveState(false); render(); toast(next?'تم تثبيت الإعلان':'تم إلغاء تثبيت الإعلان','success');}catch(err){toast(err.message||t('requiresFirebase'),'error');} break; }
           case 'hide-announcement': { if(!state.developer.unlocked)break; if(!await confirmModal({title:t('deactivate'),message:t('deactivate'),danger:true}))break; try{await Developer.setAnnouncement(id,{active:false,pinned:false}); state.announcements=state.announcements.filter(x=>x.id!==id); render(); toast(t('savedMsg'),'success');}catch(err){toast(err.message||t('requiresFirebase'),'error');} break; }
           case 'save-reply': { const fd=new FormData($('#replyForm')); await Developer.replyInquiry(id, fd.get('reply')); modalStack.at(-1)?.close(); break; }
         }
@@ -958,6 +1117,9 @@
 
       document.addEventListener('submit', async e => {
         e.preventDefault(); const f=e.target;
+        if(f.id==='friendSearchForm'){const fd=new FormData(f);state.social.query=String(fd.get('query')||'');try{await Social.search(state.social.query);}catch(err){toast(err.message||'تعذر البحث','error');}}
+        if(f.id==='chatForm'){const fd=new FormData(f);try{await Social.sendMessage(fd.get('message'));f.reset();}catch(err){toast(err.message||'تعذر إرسال الرسالة','error');}}
+        if(f.id==='teamChatForm'){const fd=new FormData(f);try{await Social.sendTeamMessage(fd.get('message'));f.reset();}catch(err){toast(err.message||'تعذر إرسال الرسالة','error');}}
         if(f.id==='quickAddForm'){ const fd=new FormData(f); Tasks.create(parseQuickAdd(fd.get('text'))); f.reset(); render(); toast(t('savedMsg'),'success'); }
         if(f.id==='focusForm'){ const fd=new FormData(f); startFocus({taskId:fd.get('taskId')||null,subjectId:fd.get('subjectId')||null,minutes:clamp(Math.round(num(fd.get('minutes'),25)),1,240)}); }
         if(f.id==='emailLoginForm'){ const fd=new FormData(f); await loginWithEmail(fd.get('email'),fd.get('password'),true); }
@@ -965,7 +1127,10 @@
         if(f.id==='resetForm'){ const fd=new FormData(f); await resetPassword(fd.get('email')); }
         if(f.id==='profileForm'){ const fd=new FormData(f); state.profile.name=String(fd.get('name')||'').trim(); state.profile.school=String(fd.get('school')||'').trim(); state.settings.accent=fd.get('accent'); if(activeProfile){ activeProfile.name=state.profile.name; activeProfile.color=state.settings.accent; const list=getProfiles(); const i=list.findIndex(p=>p.id===activeProfile.id); if(i>=0){list[i]=activeProfile;saveProfiles(list);} } saveState(); applySettings(); render(); toast(t('savedMsg'),'success'); }
         if(f.id==='settingsForm'){ const fd=new FormData(f); state.settings.lang=fd.get('lang'); state.settings.themeMode=fd.get('themeMode'); state.settings.themePreset=fd.get('themePreset'); state.settings.pomodoro.work=clamp(Math.round(num(fd.get('work'),25)),1,240); state.settings.pomodoro.short=clamp(Math.round(num(fd.get('short'),5)),1,120); state.settings.notifyLead=clamp(Math.round(num(fd.get('notifyLead'),60)),1,1440); state.settings.sound=!!fd.get('sound'); state.settings.vibration=!!fd.get('vibration'); saveState(); applySettings(); render(); toast(t('savedMsg'),'success'); }
-        if(f.id==='inquiryForm'){ const fd=new FormData(f); await sendInquiry(fd.get('subject'),fd.get('message')); f.reset(); }
+        if(f.id==='inquiryForm'){ const fd=new FormData(f); const ok=await sendInquiry(fd.get('subject'),fd.get('message'),fd.get('category')); if(ok)f.reset(); }
+        if(f.id==='catalogForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.createCatalogItem(fd.get('type'),{title:fd.get('title'),xp:fd.get('xp'),condition:fd.get('condition'),description:fd.get('description')}); f.reset();}catch(err){toast(err.message||'تعذر إنشاء العنصر','error');} }
+        if(f.id==='doubleXpForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); const end=parseDate(fd.get('endsAt')); const start=fd.get('startsAt')?parseDate(fd.get('startsAt')):new Date(); if(!end||end<=start){toast('حدد فترة صحيحة','error');return;} try{await Developer.setFlag('doubleXp',{startsAt:start.toISOString(),endsAt:end.toISOString()}); f.reset();}catch(err){toast(err.message||'تعذر تفعيل المضاعفة','error');} }
+        if(f.id==='brandingForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); const logo=String(fd.get('logo')||'').trim(); if(logo && !/^https:\/\//i.test(logo)){toast('يجب أن يبدأ رابط الشعار بـ HTTPS','error');return;} try{await Developer.setBranding(fd.get('name'),logo); }catch(err){toast(err.message||'تعذر حفظ الهوية','error');} }
         if(f.id==='announceForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); try{await Developer.sendAnnouncement(fd.get('title'),fd.get('body'),fd.has('pinned')); f.reset(); render();}catch(err){toast(err.message||t('requiresFirebase'),'error');} }
         if(f.id==='flagForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); const v=fd.get('value'); await Developer.setFlag(fd.get('key'), v==='true'?true:v==='false'?false:v); f.reset(); }
         if(f.id==='grantBadgeForm'){ if(!state.developer.unlocked)return; const fd=new FormData(f); await Developer.grantBadge(fd.get('uid'),fd.get('badgeId')); f.reset(); }
